@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <blog-post :p-child="child1" :p-child2="child2"></blog-post>
+      </div>
+    </div>
+    <script>
+      function Person(firstName, lastName) {
+        this.firstName = firstName
+        this.lastName = lastName
+      }
+      Vue.component('blog-post', {
+        props: ['pChild'],
+        template: `
+    <div class="blog-post">
+        <p>我是子组件：</p>
+        <p>我是子组件prop继承的内容：{{ pChild }}</p>
+        <hr />
+        <p>我是没有被继承的：{{ $attrs }}</p>
+    </div>
+  `,
+        inheritAttrs: true
+      })
+      const app = new Vue({
+        el: '#app',
+        data: {
+          child1: '我是被子组件继承的内容',
+          child2: '我是被子组建的子组建继承的内容'
+        }
+      })
+    </script>
+  </body>
+</html>

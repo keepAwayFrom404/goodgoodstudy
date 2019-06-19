@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #4d4d4d;
+        line-height: 1.4em;
+        background: #f3f3f3;
+      }
+      #app {
+        position: relative;
+        display: flex;
+        margin: 130px 0 40px 0;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header {
+        width: 550px;
+        background: #fff;
+      }
+      .header > h1 {
+        position: absolute;
+        left: 50%;
+        top: -70px;
+        font-size: 100px;
+        font-weight: 100;
+        color: rgba(175, 47, 47, 0.15);
+        transform: translateX(-50%);
+      }
+      .new-todo,
+      .edit {
+        width: 100%;
+        padding: 16px 16px 16px 60px;
+        font-size: 24px;
+        color: #777;
+        font-weight: 100;
+        background: rgba(0, 0, 0, 0.003);
+        box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+      }
+      input::-webkit-input-placeholder {
+        color: #f0f0f0;
+        font-weight: 100;
+      }
+      input:-moz-placeholder {
+        color: #f0f0f0;
+        font-weight: 100;
+      }
+      input::-moz-placeholder {
+        color: #f0f0f0;
+        font-weight: 100;
+      }
+      input:-ms-input-placeholder {
+        color: #f0f0f0;
+        font-weight: 100;
+      }
+      :focus {
+        outline: 0;
+      }
+      .main {
+        position: relative;
+        z-index: 2;
+        border-top: 1px solid #e6e6e6;
+        width: 550px;
+        background: #fff;
+      }
+      .toggle-all {
+        position: absolute;
+        border: none;
+        opacity: 0;
+        text-align: center;
+      }
+      .toggle-all + label {
+        width: 60px;
+        height: 34px;
+        font-size: 0;
+        position: absolute;
+        top: -52px;
+        left: -13px;
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+      .toggle-all + label:before {
+        content: '❯';
+        font-size: 22px;
+        color: #e6e6e6;
+        padding: 10px 27px 10px 27px;
+      }
+      .toggle-all:checked + label:before {
+        color: #737373;
+      }
+      .todo-list {
+        list-style: none;
+      }
+      .todo-list > li {
+        position: relative;
+        font-size: 24px;
+        border-bottom: 1px solid #ededed;
+      }
+      .todo-list li:last-child {
+        border-bottom: none;
+      }
+      
+      .todo-list li.completed label {
+        color: #d9d9d9;
+        text-decoration: line-through;
+      }
+      .toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        width: 40px;
+        height: 40px;
+        background: none;
+        opacity: 0;
+      }
+      .toggle + label {
+        display: block;
+        padding: 15px 15px 15px 60px;
+        line-height: 1.2;
+        word-break: break-all;
+        background-repeat: no-repeat;
+        background-position: center left;
+      }
+      .todo-list li .toggle:checked + label {
+        background-image: url('https://grade-pro-1257007873.cos.ap-chengdu.myqcloud.com/yes.png');
+        background-size: 36px 36px;
+      }
+      .todo-list li .toggle + label {
+        background-image: url('https://grade-pro-1257007873.cos.ap-chengdu.myqcloud.com/no2.png');
+        background-size: 34px 34px;
+      }
+      .destory {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        bottom: 0;
+        width: 40px;
+        height: 40px;
+        margin: auto 0;
+        font-size: 30px;
+        font-weight: 100;
+        color: #cc9a9a;
+        margin-bottom: 11px;
+      }
+      .destory:hover {
+        color: #af5b5e;
+      }
+      .destory:after {
+        content: 'x';
+      }
+      .footer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 550px;
+        height: 50px;
+        padding: 0 15px;
+        line-height: 300px;
+        color: #777;
+        text-align: center;
+        background: #fff;
+        border-top: 1px solid #e6e6e6;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6,
+          0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6,
+          0 17px 2px -6px rgba(0, 0, 0, 0.2);
+      }
+      .footer:before {
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        z-index: -1;
+        content: '';
+        width: 540px;
+        height: 5px;
+        border-top: none;
+        transform: translateX(-50%);
+      }
+      .footer:after {
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        z-index: -2;
+        content: '';
+        width: 530px;
+        height: 5px;
+        border-top: none;
+        transform: translateX(-50%);
+      }
+      .filters {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        list-style: none;
+      }
+      .filters > li {
+        display: inline;
+      }
+      .filters li a.selected {
+        border-color: rgba(175, 47, 47, 0.2);
+      }
+      .filters li a:hover {
+        border-color: rgba(175, 47, 47, 0.1);
+      }
+      .filters li a {
+        color: inherit;
+        margin: 3px;
+        padding: 3px 7px;
+        text-decoration: none;
+        border: 1px solid transparent;
+        border-radius: 3px;
+      }
+      .clear-completed {
+        position: absolute;
+        right: 15px;
+        cursor: pointer;
+      }
+      button {
+        font-size: 100%;
+        font-family: inherit;
+        font-weight: inherit;
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <h1>todos</h1>
+        <input
+          v-model="newTodo"
+          autofocus="autofocus"
+          autocomplete="off"
+          placeholder="What needs to be done?"
+          class="new-todo"
+          @keyup.enter="submit"
+        />
+      </div>
+      <div class="main" v-if="allList.length">
+        <input id="toggle-all" type="checkbox" class="toggle-all" />
+        <label for="toggle-all"></label>
+        <router-view></router-view>
+      </div>
+      <div class="footer" v-if="allList.length">
+        <span class="todo-count"><strong>{{activeList.length}}</strong> items left</span>
+        <ul class="filters">
+          <li><router-link @click="switchTab('all')" :class="{selected: current === 'all'}" :to="{path:'/all',query:{allList}}">All</router-link></li>
+          <li><router-link :class="{selected: current === 'active'}" :to="{path:'/active',query:{activeList}}">Active</router-link></li>
+          <li><router-link :class="{selected: current === 'completed'}" :to="{path:'/completed',query:{completedList}}">Completed</router-link></li>
+        </ul>
+        <button class="clear-completed">clear completed</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.6/vue-router.min.js"></script>
+    <script>
+      Vue.component('todo-list', {
+        props: ['todoList'],
+        template: `<ul class="todo-list">
+          <li class="todo" :class="{completed: todo.completed}" v-for="(todo, index) in filterList" :key="index">
+            <div class="view">
+              <input type="checkbox" class="toggle" v-model="todo.completed" />
+              <label>{{todo.value}}</label>
+              <button class="destory"></button>
+            </div>
+            <input type="text" class="edit" style="display:none" />
+          </li>
+        </ul>`,
+        methods: {
+          checkChange(event) {
+            // event.target.checked = !event.target.checked
+          }
+        }
+      })
+
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            newTodo: '',
+            allList: [{
+              value: '111',
+              status: 'active',
+              completed: false
+            }],
+            current: 'all'
+          }
+        },
+        computed: {
+          filterList() {
+            const current = this.current
+
+            return this.allList.filter(item => item.status === current)
+          }
+        },
+        methods: {
+          switchTab(name) {
+            this.current = name
+            console.log('switch')
+          },
+          submit() {
+            let newTodo = {}
+            newTodo.value = this.newTodo
+            newTodo.completed = false
+            this.allList.unshift(newTodo)
+            this.newTodo = ''
+            console.log(this.allList)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
