@@ -10,7 +10,7 @@
   <body>
     <div id="app">
       <div>
-        <blog-post :p-child="child1" :p-child2="child2"></blog-post>
+        <blog-post :p-child="pchild" v-bind="child1" :p-child2="child2"></blog-post>
       </div>
     </div>
     <script>
@@ -19,11 +19,19 @@
         this.lastName = lastName
       }
       Vue.component('blog-post', {
-        props: ['pChild'],
+        props: {
+          id,
+          name,
+          pChild: {
+            validator: function(value) {
+              return ['success', 'warning','danger'].indexOf(value) !== -1
+            }
+          },
+        },
         template: `
     <div class="blog-post">
         <p>我是子组件：</p>
-        <p>我是子组件prop继承的内容：{{ pChild }}</p>
+        <p>我是子组件prop继承的内容 {{ name }} {{pChild}} -- {{id}}</p>
         <hr />
         <p>我是没有被继承的：{{ $attrs }}</p>
     </div>
@@ -33,8 +41,12 @@
       const app = new Vue({
         el: '#app',
         data: {
-          child1: '我是被子组件继承的内容',
-          child2: '我是被子组建的子组建继承的内容'
+          child1: {
+            id: 'dmadawm',
+            name: 'lee'
+          },
+          child2: '我是被子组建的子组建继承的内容',
+          pchild: 'success'
         }
       })
     </script>

@@ -79,13 +79,11 @@ export default {
           item.completed = true
           return item
         })
-        this.toggleAll = false
       } else {
         this.allList = this.allList.map(item => {
           item.completed = false
           return item
         })
-        this.toggleAll = true
       }
     },
     clearCompleted () {

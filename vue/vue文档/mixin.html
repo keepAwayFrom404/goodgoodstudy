@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const myMixin = {
+        // created() {
+        //   console.log('混入对象钩子被调用')
+        // },
+        methods: {
+          hello() {
+            console.log('混入对象钩子被调用')
+          }
+        }
+      }
+      const app = new Vue({
+        el: '#app',
+        mixins: [myMixin],
+        created() {
+          this.hello()
+        },
+        methods: {
+          hello() {
+            console.log('组件钩子调用')
+          }
+        }
+      })
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <navigation-link :url="baseUrl">
+      <template v-slot:[test]>
+        <h1>Here is page title</h1>
+      </template>
+      <!-- <template v-slot:default="{user = {lastName: 'lee'}}">
+        {{user.lastName}}
+      </template>
+      <template v-slot:footer>
+        <p>Here is some contact info</p>
+      </template> -->
+    </navigation-link>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('navigation-link', {
+      props: ['url'],
+      data() {
+        return {
+          user: {
+            
+          }
+        }
+      },
+      template: `<div class="container">
+      <header>
+        <slot name="header"></slot>
+      </header>
+      <main>
+        <slot :user="user"></slot>
+      </main>
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+    </div>`
+    })
+    const app = new Vue({
+        el: '#app',
+        data: {
+          baseUrl: 'www.baidu.com',
+          username: 'hello slot',
+          test: 'header'
+        }
+      })
+  </script>
+</body>
+</html>
