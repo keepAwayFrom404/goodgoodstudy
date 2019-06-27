@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{name}}
+      <keep-alive>
+        <my-component v-if="show"></my-component>
+      </keep-alive>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component('my-component', {
+        template: '<p>2222</p>'
+      })
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            name: '111',
+            show: true
+          };
+        },
+        beforeCreate() {
+          console.log('beforeCreateDone')
+          // console.log(this.name)
+          // this.test()
+        },
+        created() {
+          console.log('createdDone')
+          // console.log(this.name)
+          // console.log(this.$el)
+          // this.test()
+        },
+        beforeMount() {
+          console.log('beforeMountDone')
+          // console.log(this.$el)
+        },
+        mounted() {
+          console.log('mountedDone')
+          // console.log(this.$el)
+        },
+        beforeUpdate() {
+          console.log('beforeUpdateDone')
+        },
+        updated() {
+          console.log('updatedDone')
+        },
+        activaed() {
+          console.log('activaedDone')
+        },
+        deactivated() {
+          console.log('deactivatedDone')
+        },
+        beforeDestroy() {
+          console.log('beforeDestoryDone')
+          // console.log(this.name)
+          // console.log(this.$el)
+          // this.test()
+        },
+        destroyed() {
+          console.log('destroyedDone')
+          // console.log(this.name)
+          // console.log(this.$el)
+          // this.test()
+        },
+        methods: {
+          test() {
+            console.log('testDone')
+          }
+        }
+      });
+      app.$destroy()
+    </script>
+  </body>
+</html>

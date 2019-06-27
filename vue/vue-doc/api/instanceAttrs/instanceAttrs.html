@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" ref="app" test="222">
+      <blog-post ref="blogPost">
+        <template #header>
+          <h1>About me</h1>
+        </template>
+        <p>Here is page content.</p>
+        <template #footer>
+          <p>copy 2016 even you</p>
+        </template>
+        <p>if i have content down here</p>
+      </blog-post>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component('blog-post', {
+        render(h) {
+          const header = this.$slots.header
+          const body = this.$slots.default
+          const footer = this.$slots.footer
+          return h('div', [
+            h('header', header),
+            h('main', body),
+            h('footer', footer)
+          ])
+        }
+      })
+      const app = new Vue({
+        el: '#app',
+        props: ['test'],
+        $_myOptions_: 'lijiahua',
+        data() {
+          return {
+            name: '111'
+          };
+        },
+        mounted() {
+          // console.log(this.$data)
+          // console.log(this.$props)
+          // console.log(this.$el)
+          // console.log(this.$options.$_myOptions_)
+          // console.log(this.$parent)
+          // console.log(this.$root)
+          // console.log(this.$children)
+          // console.log(this.$refs)
+          // console.log(this.$isServer)
+          // console.log(this.$attrs)
+          // console.log(this.$listeners)
+        }
+      });
+    </script>
+  </body>
+</html>
