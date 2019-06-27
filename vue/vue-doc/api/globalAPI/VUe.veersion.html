@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const version = Number(Vue.version.split('.')[0])
+      if(version === 2) {
+        // Vue v2.x.x
+      } else if (version === 1) {
+        // Vue v1.x.x
+      } else {
+        // Unsupported versions of Vue
+      }
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            name: '111'
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

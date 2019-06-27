@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{name}}</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // 在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            name: '111'
+          };
+        }
+      });
+      app.name = '222'
+      console.log(app.$el.textContent === '222')
+      Vue.nextTick()
+      .then(function() {
+        console.log(app.$el.textContent === '222')
+      })
+    </script>
+  </body>
+</html>

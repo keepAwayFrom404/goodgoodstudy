@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // 让一个对象可响应。Vue 内部会用它来处理 data 函数返回的对象。
+      const state = Vue.observable({count:0})
+      const Demo = {
+        render(h) {
+          return h('button', {
+            on: { click: () => { state.count++}}
+          }, `count is: ${state.count}`)
+        }
+      }
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            name: '111'
+          };
+        },
+        render: Demo.render
+      });
+    </script>
+  </body>
+</html>

@@ -12,11 +12,27 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
+      const getChildrenTextContent = function(children) {
+        return children.map(node => {
+          return node.children ? getChildrenTextContent(node.children) : node.text
+        }).join('')
+      }
       Vue.component('anchored-heading', {
         render(createElement) {
+          const headingId = getChildrenTextContent(this.$slots.default)
+          .toLowerCase()
+          .replace(/\W+/g, '-')
+          .replace(/(^-|-$)/g, '')
           return createElement(
             'h' + this.level,
-            this.$slots.default
+            [
+              createElement('a', {
+                attrs: {
+                  name: headingId,
+                  href: '#' + headingId
+                }
+              }, this.$slots.default)
+            ]
           )
         },
         props: {

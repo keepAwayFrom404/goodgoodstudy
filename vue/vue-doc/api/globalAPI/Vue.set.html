@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{obj.name}}--{{obj.user}}</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // 向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 Vue 无法探测普通的新增属性,注意对象不能是 Vue 实例，或者 Vue 实例的根数据对象。
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            obj: {
+              name: '111'
+            }
+          };
+        },
+      });
+      Vue.set(app.obj, 'user', '222')
+    </script>
+  </body>
+</html>
