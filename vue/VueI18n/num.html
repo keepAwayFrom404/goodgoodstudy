@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ $n(100, 'currency') }}</p>
+      <p>{{ $n(100, 'currency', 'ja-JP')}}</p>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+    <script>
+      const numberFormats = {
+        'en-US': {
+          currency: {
+            style: 'currency',
+            currency: 'USD'
+          }
+        },
+        'ja-JP': {
+          currency: {
+            style: 'currency', currency: 'JPY', currencyDisplay: 'symbol'
+          }
+        }
+      }
+      const i18n = new VueI18n({
+        numberFormats
+      });
+
+      new Vue({
+        i18n
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

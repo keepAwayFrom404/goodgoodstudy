@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <i18n path="info" tag="p" :places="{ limit: changeLimit }">
+        <a place="action" :href="url" target="_blank">{{ $t('change') }}</a>
+      </i18n>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+    <script>
+      const messages = {
+        en: {
+          info: 'You can {action} until {limit} minutes from departure.',
+          change: 'change your flight',
+          refund: 'refund the ticket'
+        }
+      };
+      const i18n = new VueI18n({
+        locale: 'en',
+        fallbackLocale: 'en',
+        messages,
+        silentFallbackWarn: true,
+        sync: false
+      });
+      new Vue({
+        i18n,
+        data() {
+          return {
+            url: '/term',
+            changeLimit: 20
+          };
+        }
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

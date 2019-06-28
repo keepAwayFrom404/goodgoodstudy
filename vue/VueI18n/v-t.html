@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="fade">
+        <span v-if="toggle" v-t.preserve="preserve"></span>
+      </transition>
+      <button @click="toggle = !toggle">Toggle</button>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+    <script>
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: { preserve: 'with preserve'}
+          },
+          preserveDirectiveContent: true
+        }),
+        data: {
+          toggle: true
+        }
+      }).$mount('#app');
+    </script>
+  </body>
+</html>
