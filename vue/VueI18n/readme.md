@@ -27,9 +27,14 @@
 - v-t 比 $t 方法具有更好的性能，因为在一次翻译时自定义指令会进行缓存。此外可以使用由 vue-i18n-extensions 提供的 Vue 编译器模块进行预翻译,因此，可以进行更多性能优化。
 - v-t 不能像 $t 一样灵活使用，它更复杂。带有 v-t 的翻译内容会被插入到元素的 textContent 中。此外，当你使用服务器渲染时，你需要设置自定义指令到 createRenderer 函数的 directives 选项。
 ## 组件插件
-```<i18n path="term" tag="label" for="tos">
-    <a :href="url" target="_blank">{{ $t('tos') }}</a>
-  </i18n>``` 
+<i18n path="term" tag="label" for="tos">
+  <a :href="url" target="_blank">{{ $t('tos') }}</a>
+</i18n>
+
 - 如果你仍想在命名格式中插入文本内容，可以在 i18n 组件上定义 places 属性:places="{ limit: refundLimit }"。
 ## 单文件组件
 - 你可以使用具有多个 i18n 自定义块的语言环境信息，这些语言环境信息将合并为组件的语言环境信息。
+## 语言环境变更
+- 对于使用了 sync: false 的组件，语言环境的更改将被忽略。
+## 延迟加载翻译
+- 
