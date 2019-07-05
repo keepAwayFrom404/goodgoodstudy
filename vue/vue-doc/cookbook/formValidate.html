@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form novalidate="true"  action="https://vuejs.org/" @submit="checkForm" method="POST" id="app">
+      <p v-if="errors.length">
+        <b>Please correct the following error(s): </b>
+        <ul>
+          <li v-for="(error, index) in errors" :key="index">
+            {{ error }}
+          </li>
+        </ul>
+      </p>
+      <p>
+          Given a budget of 100 dollars, indicate how much
+          you would spend on the following features for the
+          next generation Star Destroyer. Your total must sum up to 100.
+        </p>
+        <p>
+            <input
+              v-model.number="weapons"
+              type="number"
+              name="weapons"
+            > Weapons <br/>
+            <input
+              v-model.number="shields"
+              type="number"
+              name="shields"
+            > Shields <br/>
+            <input
+              v-model.number="coffee"
+              type="number"
+              name="coffee"
+            > Coffee <br/>
+            <input
+              v-model.number="ac"
+              type="number"
+              name="ac"
+            > Air Conditioning <br/>
+            <input
+              v-model.number="mousedroids"
+              type="number"
+              name="mousedroids"
+            > Mouse Droids <br/>
+          </p>
+          <p>
+              Current Total: {{total}}
+            </p>
+          <p>
+            <input type="submit" value="Submit">
+          </p>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            errors: [],
+            weapons: 0,
+    shields: 0,
+    coffee: 0,
+    ac: 0,
+    mousedroids: 0
+          }
+        },
+        computed: {
+          total() {
+            return Number(this.weapons) +
+         Number(this.shields) +
+         Number(this.coffee) +
+         Number(this.ac+this.mousedroids);
+          }
+        },
+        created() {
+          
+        },
+        methods: {
+          checkForm(e) {
+            this.errors = [];
+
+      if (this.total != 100) {
+        this.errors.push('Total must be 100!');
+      }
+
+      if (!this.errors.length) {
+        return true;
+      }
+
+      e.preventDefault();
+          }
+          
+        }
+      });
+    </script>
+  </body>
+</html>

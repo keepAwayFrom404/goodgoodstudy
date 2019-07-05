@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="(user, index) in users" :key="index">
+          {{ user.name }}
+        </li>
+      </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <script>
+
+      Vue.prototype.$http = axios
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            users: []
+          }
+        },
+        created() {
+          this.$http.get('https://jsonplaceholder.typicode.com/users')
+          .then(res => {
+            this.users = res.data
+          })
+        }
+      });
+    </script>
+  </body>
+</html>
