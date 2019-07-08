@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>
+      <router-link to="/user/li">Go to foo</router-link>
+      <router-link to="/user/jiahua">Go to Bar</router-link>
+    </p>
+    <div class="red" style="color:red;">
+        <router-view></router-view>
+    </div>
+    
+  </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+      const Foo = { template: '<div>foo</div>' }
+      const Bar = { template: '<div>bar</div>' }
+      const User = { template: '<div>user{{$route.params.id}}</div>',
+    watch: {
+      beforeRouteUpdate(to, from, next) {
+        console.log(to, from)
+      }
+    } }
+      const routes = [
+        {path: '/foo', component: Foo},
+        {path: '/bar', component: Bar},
+        {path: '/user/:id', component: User},
+      ]
+      const router = new VueRouter({
+        routes
+      })
+      const app = new Vue({
+        router
+      }).$mount('#app')
+    </script>
+</body>
+</html>

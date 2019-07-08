@@ -21,9 +21,30 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <p class="p1">This paragraph has <em>emphasized text</em> in it.</p>
-    <!-- <p>woshi1lingyigep</p> -->
+  <div id="app">
+    <p>{{$t('message.hello')[1]}}</p>
+  </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+<script>
+  const messages = {
+  en: {
+    message: {
+      hello: ['hello world', 'hello lijiahua']
+    }
+  },
+  ja: {
+    message: {
+      hello: 'こんにちは、世界'
+    }
+  }
+}
+const i18n = new VueI18n({
+  locale: 'en',
+  messages
+})
+new Vue({i18n}).$mount('#app')
+</script>
   </div>
 </body>
 </html>

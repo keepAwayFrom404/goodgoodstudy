@@ -1,0 +1,17 @@
+- 路由跳转时提供了path，param会被忽略，只能使用{name:'',params:{}}或者{path:'',query:{}}
+- router.replace、不会向history添加一条记录，而是替换掉当前的history记录<router-link :to="..." replace>	
+- router.go()前进或后退几步
+- 使用components配置一个路由多视图
+## 完整的导航解析流程
+- 导航被触发
+- 在失活的组件里调用离开守卫
+- 调用全局的beforeEach守卫
+- 在重用的组件里调用beforeRouteUpdate
+- 在路由配置里调用beforeEnter
+- 解析异步路由组件
+- 在被激活的组件里调用beforeRouterEnter
+- 调用全局的beforeResolve守卫
+- 导航被确定
+- 调用全局的afterEach钩子
+- 触发dom更新
+- 用创建好的实例调用beforeRouterEnter守卫中传给next的回调函数
