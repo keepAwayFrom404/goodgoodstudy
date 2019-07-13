@@ -1,50 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    /* .container {
-      color: yellow;
-    }
-    .p1 { 
-      color: green;
-    }
-    em {
-      color: red;
-    } */
-    p {
-      font-size: 80%;
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <p>{{$t('message.hello')[1]}}</p>
-  </div>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
-<script>
-  const messages = {
-  en: {
-    message: {
-      hello: ['hello world', 'hello lijiahua']
-    }
-  },
-  ja: {
-    message: {
-      hello: 'こんにちは、世界'
-    }
-  }
-}
-const i18n = new VueI18n({
-  locale: 'en',
-  messages
-})
-new Vue({i18n}).$mount('#app')
-</script>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .pagination {
+        cursor: pointer;
+        padding: 5px 10px;
+        margin-right: 10px;
+        border: 1px solid #000;
+      }
+      .pagination-active {
+        color: pink;
+        border: 1px solid pink;
+      }
+      .listItem {
+        width: 200px;
+        border-bottom: 1px solid #000;
+      }
+      .operation {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p class="listItem" v-for="item in showData" :key="item.name">{{item.name}}</p>
+      <span class="pagination" :class="{'pagination-active':(currnetPage === item)}" v-for="item in pageSize" :key="item" @click="changeList(item)">{{ item }}</span>
+      <div class="operation">
+          每页条数：<input type="number" v-model="num" @keyup.enter="changeSize">
+          <button @click="changeSize">点我</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            list: {
+              listData: [
+                {
+                  name: 'lijiahua',
+                  id: 1
+                },
+                {
+                  name: 'lijiadawdahua',
+                  id: 2
+                },
+                {
+                  name: 'aadaw',
+                  id: 3
+                },
+                {
+                  name: 'lijdadawiahua',
+                  id: 4
+                },
+                {
+                  name: 'lijidawdawahua',
+                  id: 5
+                },
+                {
+                  name: 'dawdawdlijiahua',
+                  id: 6
+                },
+                {
+                  name: 'dadssxxsdlijiahua',
+                  id: 7
+                },
+                {
+                  name: 'vfbggylijiahua',
+                  id: 8
+                },
+                {
+                  name: ',;lk;plijiahua',
+                  id: 9
+                },
+                {
+                  name: 'lijiahuadawdawd',
+                  id: 10
+                }
+              ],
+              count: 10
+            },
+            pageNum: 3,
+            showData: null,
+            num: 3,
+            currnetPage: 1,
+          }
+        },
+        computed: {
+          pageSize() {
+            return Math.ceil(this.list.listData.length / this.pageNum) >= 1 ? Math.ceil(this.list.listData.length / this.pageNum) : 1
+          }
+        },
+        methods: {
+          changeList(item) {
+            this.currnetPage = item
+            this.showData = this.list.listData.slice((item-1)*this.pageNum,item*this.pageNum)
+          },
+          changeSize() {
+            if(this.num <= 0) {
+              alert('不存在的')
+              return false
+            }
+            this.pageNum = this.num
+            this.changeList(1)
+          }
+        },
+        mounted() {
+          this.showData = this.list.listData.slice(0, this.pageNum)
+        }
+      });
+    </script>
+  </body>
 </html>
