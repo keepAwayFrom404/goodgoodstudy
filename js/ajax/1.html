@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="demo"></div>
+  <script>
+    // 'use strict'
+    // function success(text) {
+    //   const textArea = document.getElementById('demo')
+    //   textArea.value = text
+    // }
+    // function fail(code) {
+    //   const textArea = document.getElementById('demo')
+    //   textArea.value = 'Error code: ' + code
+    // }
+    // let request;
+    // if(window.XMLHttpRequest) {
+    //   request = new XMLHttpRequest()
+    // } else {
+    //   request = new ActiveXObject('Microsoft.XMLHTTP')
+    // }
+    // request.onreadystatechange = function () {
+    //   if(request.readyState === 4) {
+    //     if(request.status === 200) {
+    //       return success(request.responseText)
+    //     } else {
+    //       return fail(request.status)
+    //     }
+    //   } else {
+    //     console.log('请求中')
+    //   }
+    // }
+    // request.open('GET', 'https://baidu.com')
+    // request.send()
+    // alert('请求已发送，等待响应...')
+    function refreshPrice(data) {
+      const p = document.getElementById('test-jsonp')
+      p.innerHTML = `当前价格：${data['0000001'].name}`
+    }
+    function getPrice() {
+      const js = document.createElement('script'),
+      head = document.getElementsByTagName('head')[0]
+      js.src = 'http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice'
+    }
+  </script>
+</body>
+</html>
