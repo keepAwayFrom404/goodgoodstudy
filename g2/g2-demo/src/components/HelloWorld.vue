@@ -196,6 +196,20 @@ const data13 = [{ year: '1991',value: 3},
     { year: '1997',value: 7}, 
     { year: '1998',value: 9}, 
     { year: '1999',value: 13}];
+const data14 = [
+  { gender: '男', count: 40, class: '一班', grade: '一年级' },
+  { gender: '女', count: 30, class: '一班', grade: '一年级' },
+  { gender: '男', count: 35, class: '二班', grade: '一年级' },
+  { gender: '女', count: 45, class: '二班', grade: '一年级' },
+  { gender: '男', count: 20, class: '三班', grade: '一年级' },
+  { gender: '女', count: 35, class: '三班', grade: '一年级' },
+  { gender: '男', count: 30, class: '一班', grade: '二年级' },
+  { gender: '女', count: 40, class: '一班', grade: '二年级' },
+  { gender: '男', count: 25, class: '二班', grade: '二年级' },
+  { gender: '女', count: 32, class: '二班', grade: '二年级' },
+  { gender: '男', count: 28, class: '三班', grade: '二年级' },
+  { gender: '女', count: 36, class: '三班', grade: '二年级' }
+];
 const imageMap = {
   John: 'https://zos.alipayobjects.com/rmsportal/mYhpaYHyHhjYcQf.png',
   Damon: 'https://zos.alipayobjects.com/rmsportal/JBxkqlzhrlkGlLW.png',
@@ -211,7 +225,7 @@ export default {
     msg: String
   },
   mounted() {
-    this.guide5();
+    this.facet();
   },
   methods: {
     baseChart() {
@@ -1013,6 +1027,47 @@ export default {
         })
         chart.changeData(data)
       },3000)
+    },
+    facet() {
+      const DataView = DataSet.DataView
+      const chart = new G2.Chart({
+        container: 'hello',
+        width: 800,
+        height: 400,
+        // animate: false,
+        padding: [0, 90, 80, 80]
+      })
+      chart.source(data14)
+      chart.coord('theta')
+      chart.tooltip({
+        showTitle: false
+      })
+      chart.facet('tree', {
+        fields: ['grade', 'class'],
+        line: {
+          stroke: '#00a3d7'
+        },
+        lineSmooth: true,
+        eachView(view, facet) {
+          const data = facet.data
+          const dv = new DataView()
+          dv.source(data).transform({
+            type: 'percent',
+            field: 'count',
+            dimension: 'gender',
+            as: 'percent'
+          })
+          view.source(dv, {
+            percent: {
+              formatter(val) {
+                return (val*100).toFixed(2)+'%'
+              }
+            }
+          })
+          view.intervalStack().position('percent').color('gender')
+        }
+      })
+      chart.render()
     }
   }
 };
