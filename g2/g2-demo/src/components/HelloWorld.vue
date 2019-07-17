@@ -225,7 +225,7 @@ export default {
     msg: String
   },
   mounted() {
-    this.facet();
+    this.baseChart();
   },
   methods: {
     baseChart() {
@@ -243,11 +243,11 @@ export default {
           lineWidth: 10, // borderWidth
           radius: 50 // borderRadius
         },
+        padding: [50,50,80,50],
         // 绘制区域样式
-        plotBackground: {
-          stroke: 'red'
-        },
-        theme: 'dark',
+        // plotBackground: {
+        //   stroke: 'red'
+        // },
         renderer: 'svg'
       });
       const defs = {
@@ -257,15 +257,20 @@ export default {
         sold: {
           type: 'linear',
           alias: 'leeTest',
-          min: 0,
-          max: 200
         }
       };
       chart.source(data, defs);
       chart
         .interval()
         .position('genre*sold')
-        .color('genre');
+        .color('genre')
+        .label('sold', {
+          offset: 20,
+          textStyle: {
+            textAlign: 'center',
+            fill: ''
+          }
+        })
       chart.render();
     },
     dataSet() {
