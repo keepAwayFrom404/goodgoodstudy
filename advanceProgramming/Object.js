@@ -23,4 +23,14 @@ const obj = {
   name: '111'
 }
 const testArr = [obj]
-console.log(testArr.indexOf(obj))
+// console.log(testArr.indexOf(obj))
+const values = [1, 2, 3, 4, 5]
+const sum = values.reduce((prev, cur, index, array) => {
+  // console.log(prev, cur, index, array)
+  return prev + cur
+})
+// console.log(sum)
+
+/**
+ * Date对象
+ */
