@@ -15,4 +15,12 @@ const arrayF = [0, 1, 5, 5, 10, 15]
 const colors = ['red', 'green', 'blue']
 const colors2 = colors.concat('yellow', ['black', 'brown'])
 const colors3 = colors2.slice(-7)
-console.log(colors3)
+// console.log(colors3)
+let remove = colors.splice(0, 1)
+remove = colors.splice(1, 1, 'yellow', 'orange')
+// console.log(colors)
+const obj = {
+  name: '111'
+}
+const testArr = [obj]
+console.log(testArr.indexOf(obj))
