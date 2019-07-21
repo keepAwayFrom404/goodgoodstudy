@@ -110,4 +110,19 @@
 
 3. Date 类型
 
-（1）
+### 07.21
+
+（1）1970 年开始到现在的时间戳
+（2）方法：
+
+- getTime() 返回时间戳
+- getFullYear() 返回四位数的年份
+- getMonth() 返回 0 开始的月份，记得加 1
+- getDate() 返回日期中的天数，1-31
+- getDay() 返回日期中星期几，0 表示星期日
+- getHours() 返回小时数，0-23，记得加 1
+- getMinutes() 返回分钟数 0-59
+- getSeconds() 返回日期的秒数 0-59
+- getMilliseconds() 返回日期的毫秒数
+- getTimezoneOffset() 返回本地时间与 UTC 时间相差的分钟数
+- 超过最大值则前一位加 1

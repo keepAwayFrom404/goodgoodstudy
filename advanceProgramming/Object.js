@@ -34,3 +34,11 @@ const sum = values.reduce((prev, cur, index, array) => {
 /**
  * Date对象
  */
+const a = Date.now()
+
+function foo() {
+  console.log('doing something')
+}
+foo()
+const b = Date.now() - a
+console.log(b)
