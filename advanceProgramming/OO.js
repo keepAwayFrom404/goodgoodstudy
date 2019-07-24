@@ -10,6 +10,7 @@ function createPerson(name = 'lee', age = 22, job = 'programmer') {
   }
   return o
 }
+
 const person1 = createPerson()
 const person2 = createPerson('Greg', 27, 'Doctor')
 
@@ -37,6 +38,7 @@ Person1.prototype.sayName = function() {
 }
 const person5 = new Person1()
 const person6 = new Person1()
+// console.log(Person1.prototype.isPrototypeOf(person5)); // 证明[[prototype]]链接的存在性与关系
 
 person5.name = 'Greg'
 person5.name = null
@@ -52,6 +54,7 @@ Person2.prototype = {
     console.log(this.name);
   }
 }
+
 Object.defineProperty(Person2.prototype, 'constructor', {
   enumerable: false,
   value: Person2
@@ -93,6 +96,7 @@ const friend = new Person4("Nicholas", 29, "Software Engineer")
 
 function SpecialArray() {
   const values = []
+  // values.push(...Array.from(arguments))
   values.push.apply(values, arguments)
   values.toPipedString = function() {
     return this.join('|')
