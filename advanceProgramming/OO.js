@@ -15,8 +15,6 @@ function createPerson(name = 'lee', age = 22, job = 'programmer') {
 const person1 = createPerson()
 person1.friends.push('lijh')
 const person2 = createPerson('Greg', 27, 'Doctor')
-console.log(person2.friends)
-
 
 // 构造函数模式
 function Person(name, age, job) {
