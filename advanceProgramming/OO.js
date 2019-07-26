@@ -15,18 +15,17 @@ function createPerson(name = 'lee', age = 22, job = 'programmer') {
 const person1 = createPerson()
 person1.friends.push('lijh')
 const person2 = createPerson('Greg', 27, 'Doctor')
-console.log(person2.friends)
-
 
 // 构造函数模式
 function Person(name, age, job) {
   this.name = name
   this.age = age
   this.job = job
-  this.sayName = function () {
+  this.sayName = function() {
     console.log(this.name);
   }
 }
+
 Person("Nicholas", 29, "Software Engineer")
 const person4 = new Person("Greg", 27, "Doctor")
 const o = {}
@@ -37,7 +36,7 @@ function Person1() {}
 Person1.prototype.name = 'Nicholas'
 Person1.prototype.age = 29
 Person1.prototype.job = 'Software Engineer'
-Person1.prototype.sayName = function () {
+Person1.prototype.sayName = function() {
   console.log(this.name);
 }
 const person5 = new Person1()
@@ -54,7 +53,7 @@ Person2.prototype = {
   age: 22,
   job: 'software engineer',
   friends: ["Shelby", "Court"],
-  sayName: function () {
+  sayName: function() {
     console.log(this.name);
   }
 }
@@ -76,7 +75,7 @@ function Person3(name, age, job) {
 }
 Person3.prototype = {
   constructor: Person3,
-  sayName: function () {
+  sayName: function() {
     console.log(this.name);
   }
 }
@@ -90,7 +89,7 @@ function Person4(name, age, job) {
     name,
     age,
     job,
-    sayName: function () {
+    sayName: function() {
       console.log(this.name);
     }
   }
@@ -102,7 +101,7 @@ function SpecialArray() {
   const values = []
   // values.push(...Array.from(arguments))
   values.push.apply(values, arguments)
-  values.toPipedString = function () {
+  values.toPipedString = function() {
     return this.join('|')
   }
   return values
@@ -115,7 +114,7 @@ function Person5(name, age, job) {
   const o = new Object()
   // 可以在这里定义私有的变量和函数
   // 添加方法
-  o.sayName = function () {
+  o.sayName = function() {
     console.log(name);
   }
   return o
