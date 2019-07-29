@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .con {
+      margin-top: 100px;
+      margin-left: 100px;
+      width: 1280px;
+      position: relative;
+      /* background: blue; */
+      height: 20px;
+      overflow: hidden;
+    }
+
+
+    .a::before {
+      content: '';
+      display: block;
+      margin: -25px auto 0;
+      height: 25px;
+      border-radius: 640px/10px;
+      box-shadow: 0 0 2px black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="con">
+    <div class="a"></div>
+  </div>
+</body>
+
+</html>

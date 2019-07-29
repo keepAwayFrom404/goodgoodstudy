@@ -12,9 +12,11 @@
   <div id="helloworld">
     <label for="locale">locale</label>
     <select v-model="$i18n.locale">
-      <option v-for="(lang, i) in langs" :key="`lang${i}`" :value="lang">{{lang}}</option>
+      <option v-for="(lang, i) in langs" :key="`lang${i}`" :value="lang">{{
+        lang
+      }}</option>
     </select>
-    <p>message: {{$t('hello')}}</p>
+    <p>message: {{ $t('hello') }}</p>
   </div>
 </template>
 
@@ -24,9 +26,9 @@ export default {
   data() {
     return {
       langs: ['en', 'ja']
-    }
+    };
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
