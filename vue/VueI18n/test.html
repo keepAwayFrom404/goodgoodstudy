@@ -1,61 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="app">
-      <transition name="fade">
-        <span v-if="toggle" v-t="{path: 'preserve', args: {name: 'lee'}}"></span>
-      </transition>
-      <button @click="toggle = !toggle">Toggle</button>
-    </div>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
-    <script>
-      const messages = {
-        en: { preserve: 'hi {name}!' },
-        ja: { preserve: 'こんにちは、{name}！' }
-      };
-      const Component1 = {
-        template: `<div class="container">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <transition name="fade">
+      <span v-if="toggle" v-t="{path: 'preserve', args: {name: 'lee'}}"></span>
+    </transition>
+    <button @click="toggle = !toggle">Toggle</button>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+  <script>
+    const messages = {
+      en: {
+        preserve: 'hi {name}!'
+      },
+      ja: {
+        preserve: 'こんにちは、{name}！'
+      }
+    };
+    const Component1 = {
+      template: `<div class="container">
         <p>Component1 locale messages: {{ $t("message.hello") }}</p>
         <p>Fallback global locale messages: {{ $t("message.greeting") }}</p>
       </div>`,
-        i18n: {
-          messages: {
-            en: { message: { hello: 'hello component1' } },
-            ja: { message: { hello: 'こんにちは、component1' } }
+      i18n: {
+        messages: {
+          en: {
+            message: {
+              hello: 'hello component1'
+            }
+          },
+          ja: {
+            message: {
+              hello: 'こんにちは、component1'
+            }
           }
         }
-      };
-      const i18n = new VueI18n({
-        locale: 'en',
-        fallbackLocale: 'en',
-        messages,
-        silentFallbackWarn: true,
-        sync: false
-      });
-      new Vue({
-        i18n,
-        components: {
-          Component1
-        },
-        data() {
-          return {
-            path: 'hello',
-            toggle: true
-          };
-        },
-        computed: {
-          nickName() {
-            return 'kazupon';
-          }
+      }
+    };
+    const i18n = new VueI18n({
+      locale: 'en',
+      fallbackLocale: 'en',
+      messages,
+      silentFallbackWarn: true,
+      sync: false
+    });
+    new Vue({
+      i18n,
+      components: {
+        Component1
+      },
+      data() {
+        return {
+          path: 'hello',
+          toggle: true
+        };
+      },
+      computed: {
+        nickName() {
+          return 'kazupon';
         }
-      }).$mount('#app');
-    </script>
-  </body>
+      }
+    }).$mount('#app');
+  </script>
+</body>
+
 </html>
