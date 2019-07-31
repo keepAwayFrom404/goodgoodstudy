@@ -366,3 +366,9 @@
    （5）innerWidth，innerHeight 返回浏览器的窗口大小；document 下面的 clientWidth，clientHeight 返回视口大小
    （6）定时器 setTimeout 调用的代码是在全局作用域执行的，this 指向 window，严格下 undefined;setInterval 间隔调用代码，很有必要使用 clearInterval 取消，最好不要使用间歇调用，因为后一次调用可能在前一次还未结束就开始了，使用超时调用模拟间歇调用是很不错的方式
    （7）alert、confirm、prompt 可以调用系统对话框向用户显示信息，window 的 print 方法可以将网页导出
+2. location 对象
+   （1）即是 window 的属性又是 document 的属性，引用的是一个对象，保存当前文档对的信息
+   （2）hash：返回 url 中 hash（#h 后的字符）的值；host 返回服务器名称加端口号；hostname 不带端口号的服务器名称；herf 当前加载页面完整的 url；pathname 返回 url 中的目录或文件名；port：端口号；protocol 返回使用的协议；search 返回 url 的查询字符串
+   （3）每次修改 location 都会以新 url 重新加载
+   （4）replace 属性不会在历史记录中生成新纪录
+   （5）reload 重新加载（可能从缓存中获得）；加上 true 参数会从服务端重新加载数据；放在 reload 后面的代码可能不会执行
