@@ -372,3 +372,28 @@
    （3）每次修改 location 都会以新 url 重新加载
    （4）replace 属性不会在历史记录中生成新纪录
    （5）reload 重新加载（可能从缓存中获得）；加上 true 参数会从服务端重新加载数据；放在 reload 后面的代码可能不会执行
+3. navigator 对象
+（1）识别客户端浏览器的标准
+（2）属性或者方法：
+- appName：完整的浏览器名称
+- language：浏览器主语言
+- cookieEnable：cookie是否启用
+- onLine：浏览器是否联网
+- platform：浏览器所在系统平台
+- plugins：浏览器中安装的插件信息的数组
+- prference（）设置用户首选项
+- product：产品名称
+- userAgent：浏览器用户代理字段
+- userProfile：借以访问用户个人信息的对象
+- vendor：浏览器的品牌
+（3）检测插件：name：名称；description：描述；filename：文件名；length：处理的MIME类型数量
+- 普通检测遍历plugins查看是否存在；在ie中唯一方式是使用专有的ActiveXObject类型，来尝试创建一个特定插件的实例（需要使用try catch 创建失败会报错）
+- refresh刷新插件列表，带上true参数会刷新页面
+4. screen 对象
+（1）包含浏览器窗口外部显示器，如像素的宽度和高度，一般比较少用到，不过有时候可能用到其中的信息来调整窗口大小
+- 例：window.resizeTo(screen.availWidth, screen.availHeight)
+5. history对象
+（1）保存着从浏览器打开算起的用户上网记录
+（2）go：接收一个参数，向前或者向后跳；也可以传递字符串，会跳转到包含该字符的第一个位置；back和forword代替一步的前进后退
+（3）length属性保存历史纪录的数量
+（4）url变化就会创建一条新纪录，改变包括url的hash变化，因此设置location.hash会生成一条记录
