@@ -1,8 +1,10 @@
 import Demo from './components/demo'
+import Transform from './components/transform'
 
 const VueComponent = {
-  install: function (Vue) {
+  install: function(Vue) {
     Vue.component('demo', Demo)
+    Vue.component('transform', Transform)
   }
 }
 
@@ -13,5 +15,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default VueComponent
 
 export {
-  Demo
+  Demo,
+  Transform
 }

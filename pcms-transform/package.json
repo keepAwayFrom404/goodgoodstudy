@@ -8,12 +8,15 @@
   "src:main": "src/index.js",
   "dependencies": {
     "element-ui": "^2.4.1",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
     "vue": "^2.5.17",
     "vue-pcms": "^1.0.1-ci.22"
   },
   "cms": {
     "components": {
-      "demo": "demo"
+      "demo": "demo",
+      "transform": "transform"
     }
   },
   "devDependencies": {

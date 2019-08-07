@@ -115,7 +115,7 @@ export default {
 
     if (!this.componentConfig) {
       // node脚本替换config文件路径
-      this.componentConfig = JSON.stringify(require('@/components/transform/config.json'), null, 2).replace(/\n/g, '\n      ')
+      this.componentConfig = JSON.stringify(require('@/components/demo/config.json'), null, 2).replace(/\n/g, '\n      ')
     }
 
     this.jsInput = CodeMirror(document.getElementById('js-input-container'), {

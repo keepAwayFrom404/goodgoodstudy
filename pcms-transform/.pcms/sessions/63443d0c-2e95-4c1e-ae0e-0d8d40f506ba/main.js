@@ -6,8 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 
 // node脚本替换路径
-import C from '@/components/transform'
-Vue.component('transform', C)
+import C from '@/components/demo'
+Vue.component('demo', C)
 
 Vue.config.productionTip = false
 Vue.use(vuePcms, {
