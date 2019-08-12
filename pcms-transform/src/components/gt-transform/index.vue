@@ -80,7 +80,7 @@
             <span class="app-category-title">已选</span>
             <span>（{{ choosedValue.length }}） </span>
             <span v-if="maxLength !== Infinity">最多选择{{ maxLength }}个</span>
-            <span v-if="checkedTipText">{{ checkTipText }}</span>
+            <span v-if="checkedTipText">{{ checkedTipText }}</span>
           </span>
         </span>
       </template>
@@ -140,7 +140,7 @@ export default {
       type: String,
       default: ''
     },
-    // 是否展示分类筛选
+    // 是否展示分类筛选按钮
     categoryBtnShow: {
       type: Boolean,
       default: true
@@ -227,6 +227,9 @@ export default {
               ) || this.choosedValue.includes(item.key)
             );
           }
+          if (this.queryCache === '#') {
+            return this.choosedValue.includes(item.key);
+          }
         } else {
           this.filterByCategory = false;
           this.filterBySubCategory = false;
@@ -282,13 +285,16 @@ export default {
             item.subCategory.includes(this.queryCache.replace(/#/g, ''))
         ).length;
       }
-      if (this.queryCache.includes('#')) {
+      if (this.queryCache.includes('#') && this.queryCache !== '#') {
         return (this.baseData || []).filter(
           item =>
             !this.choosedValue.includes(item.key) &&
             item.combineCategory.includes(this.queryCache.replace(/#/g, ''))
         ).length;
+      } else {
+        return 0;
       }
+
       return this.queryCache
         ? (this.baseData || []).filter(
             item =>
@@ -327,10 +333,10 @@ export default {
       this.filterByCategory = false;
       this.filterBySubCategory = false;
     };
-    this.$refs.transfer.$children[0].$children[0].$el.children[0].children[1].click = e => {
-      e.preventDefault();
-      return false;
-    };
+    // this.$refs.transfer.$children[0].$children[0].$el.children[0].children[1].click = e => {
+    //   e.preventDefault();
+    //   return false;
+    // };
   },
   methods: {
     handleChange() {},
