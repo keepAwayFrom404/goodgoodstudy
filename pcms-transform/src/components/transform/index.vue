@@ -92,6 +92,7 @@
         </span>
       </span>
     </el-transfer>
+    <!-- 覆盖原穿梭框展示分类筛选 -->
     <div class="category-group-wrapper" v-show="showCategoryGroup">
       <div
         class="category-group"
@@ -134,7 +135,7 @@ export default {
     // 默认显示数据
     hotTop: {
       type: Number,
-      default: Infinity
+      default: 1
     },
     // 最多选择多少
     maxValueLen: {
@@ -201,16 +202,17 @@ export default {
         );
       },
       filterMethod: (query, item) => {
+        // 这个方法有点乱 修改一下
         this.queryCache = this.$refs.transfer
           ? this.$refs.transfer.$children[0].query
-          : ''; // query是啥
+          : '';
         const queryByCategory = this.queryCache.includes('#') ? true : false; // 根据分类筛选
         if (queryByCategory) {
           if (this.filterByCategory && this.queryCache.replace(/#/g, '')) {
             // 通过分类面板搜索，根据一级分类筛选 this.queryCache 等于一级分类
             return (
               item.category.includes(this.queryCache.replace(/#/g, '')) ||
-              this.choosedValue.includes(item.key)
+              this.choosedValue.includes(item.key) // 为什么筛选的结果可以是已经选择了的
             );
           }
           if (this.filterBySubCategory && this.queryCache.replace(/#/g, '')) {
@@ -252,7 +254,7 @@ export default {
           this.filterBySubCategory = false;
           return query
             ? item.label.includes(query)
-            : item.index < this.hotTop || this.choosedValue.includes(item.key); // hotTop是指没有搜索内容时，默认展示前hotTop个热门的app
+            : item.label || this.choosedValue.includes(item.key); // hotTop是指没有搜索内容时，默认展示前hotTop个热门的app
         }
       }
     };
@@ -341,15 +343,24 @@ export default {
     });
   },
   mounted() {
+    // 左侧搜索框聚焦
     this.$refs.transfer.$children[0].$children[1].$el.children[0].onfocus = () => {
       this.showCategoryGroup = false;
     };
+    // 筛选框keyup，显示搜索结果
     this.$refs.transfer.$children[0].$children[1].$el.children[0].onkeyup = () => {
       this.filterByCategory = false;
       this.filterBySubCategory = false;
     };
-    this.$refs.transfer.$children[0].$children[0].$el.children[0].children[1].click = e => {
+    // console.log(
+    //   (this.$refs.transfer.$children[0].$children[0].$el.children[0].children[0].click = event => {
+    //     console.log('click done');
+    //   })
+    // );
+    this.$refs.transfer.$children[0].$children[0].$el.children[0].children[0].click = e => {
+      console.log('我被阻止了');
       e.preventDefault();
+
       return false;
     };
   },
@@ -366,6 +377,7 @@ export default {
       } else {
         this.addLeftCheck(selected);
       }
+      console.log(this.choosedValue);
     },
     // 右侧框向左侧框添加数据操作
     handleRightCheckChange(selected) {
@@ -387,6 +399,7 @@ export default {
     },
     // 左侧框的全选操作
     handleAllChange() {
+      console.log(this.$refs.transfer.$children[0].checkableData);
       const selected = this.$refs.transfer.$children[0].checkableData.map(
         item => item.key
       );
@@ -399,6 +412,7 @@ export default {
         }
         this.allChecked = false;
       }
+      // console.log(this.choosedValue);
     },
     // 将当前左侧框中选中的数据加入到 value 中
     addLeftCheck(selected) {
@@ -452,11 +466,37 @@ export default {
 <style lang='scss'>
 .gt-transfer {
   position: relative;
+  margin: 20px;
+
+  .left-pane-header {
+    /* 左侧 pannel 头，覆盖原有的 pannel 头,原头全选需要多次点击才生效*/
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 10;
+    width: 398px;
+    height: 38px;
+    box-sizing: border-box;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    background: #f5f7fa;
+    border-radius: 4px;
+
+    .el-checkbox {
+      width: 100%;
+    }
+
+    .el-checkbox__label {
+      /* 覆盖原有的 checkbox label 样式*/
+      font-size: 12px;
+    }
+  }
   .category-group-wrapper {
     /* 分类筛选面板 */
     position: absolute;
     left: 2px;
-    top: 146px;
+    top: 126px;
     z-index: 10;
     width: 396px;
     height: 338px;
@@ -547,6 +587,9 @@ export default {
     .el-transfer-panel__header .el-checkbox .el-checkbox__label {
       /* 复写原有pannel头部样式*/
       font-size: 12px;
+      span {
+        display: none;
+      }
     }
     .el-transfer-panel__body {
       /* 复写原有 pannel body 样式*/

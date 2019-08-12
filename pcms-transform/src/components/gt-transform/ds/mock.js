@@ -27,6 +27,14 @@ export default {
           category: '休闲益智',
           subCategory: '休闲',
           combineCategory: '休闲益智-休闲',
+        }, {
+          label: '和平精英',
+          key: '021100_3',
+          disabled: false,
+          index: 3,
+          category: '休闲益智',
+          subCategory: '射击',
+          combineCategory: '休闲益智-射击',
         }],
         // 分类数据
         categoryList: [{
