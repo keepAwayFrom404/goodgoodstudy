@@ -130,6 +130,7 @@
   </div>
 </template>
 <script>
+import axios from 'ax';
 export default {
   props: {
     // 默认显示数据
