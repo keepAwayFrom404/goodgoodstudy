@@ -80,3 +80,25 @@
 4. 使用 NodeList
    （1）NodeList、NamedNodeMap 和 HTMLCollection 都是动态的集合，实时地
    （2）应该尽量减少 NodeList 的访问次数，因为每次访问 NodeList 都是基于文档的查询（性能消耗大），可以讲 NodeList 缓存下来
+
+# 第十一章 DOM 扩展
+
+## 11.1 选择符 API
+
+1. querySelector
+   （1）接受一个 CSS 选择符，返回该模式匹配的第一个元素，没找到返回 null
+   （2）通过 Document 调用会在文档范围查找，使用 Element 调用会在该元素后代的范围查找
+2. querySelectorAll
+   （1）接受参数与上面一样，返回的是所有匹配的元素，返回一个 NodeList 实例
+   （2）返回每一个元素可以使用 item 或者方括号语法
+3. matchesSelector
+   （1）接收相同参数，存在返回 true，不存在返回 false，支持堪忧，不同浏览器方法名不尽相同
+
+## 11.2 元素遍历
+
+1. 新属性：childElementCount 返回子节点个数（不包含文本和注释）；firstElementChild 返回第一个元素；lastElementChild 指向最后一个元素；previousElementSibling 指向后一个同辈元素；不用担心空白文本问题
+
+## 11.3 HTML5
+
+1. 与类相关的扩充：HTML4 开始 class 用的越来越多，因此 HTML5 增加了很多类的操作方法
+   （1）getElementsByClassName：接收一个参数，包含一个或者多个类名的字符串
