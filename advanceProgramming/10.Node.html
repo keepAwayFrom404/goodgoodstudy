@@ -9,12 +9,19 @@
 
   <body>
     <div>
-      This is some content that you won't get to see because it will be
-      overwritten.
+      <div id="div"><!-- comment --></div>
     </div>
     <script>
-      const pag = document.getElementsByTagName('div')[0];
-      console.log(pag.nodeName);
+      const fragment = document.createDocumentFragment();
+      const ul = document.createElement('ul');
+      let li = null;
+      for (let i = 0; i < 3; i++) {
+        li = document.createElement('li');
+        li.appendChild(document.createTextNode('item' + (i + 1)));
+        fragment.appendChild(li);
+      }
+      ul.appendChild(fragment);
+      console.log(ul);
     </script>
   </body>
 </html>

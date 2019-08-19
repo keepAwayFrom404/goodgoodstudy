@@ -11,13 +11,15 @@
 
 # 第十章 DOM
 
+## 10.1
+
 1. Node 类型：浏览器所有节点类型都继承自 NODE 类型，都有相同的基本属性和方法
    （1）每一个节点都有一个 childNodes 属性，保存着一个 NodeList 对象（一组有序节点，类数组），是基于 DOM 结构动态执行查询的结果，因此 DOM 结构的变化能够自动的反映到 NodeList 对象上
    （2）hasChildNodes 返回是否存在子节点的布尔值；ownerDocument 指向表示整个文档的文档节点
    （3）insertBefore 传入要插入的节点和作为参照的节点，被插入节点会变成参照节点的前一个同胞节点，同时方法返回
    （4）replaceChild 替换指定位置的节点，要插入的节点和要替换的节点，返回要替换的节点；removeChild，参数为将要移出的节点，返回这个节点
    （5）cloneNode 接收布尔值表示是否执行深复制，深复制节点及整个子节点树，浅复制只复制节点本身，只复制特性不复制 js（事件处理函数）
-   （6）normalize 处理文档中的文本节点，在后代节点找到空文本删除，两个响铃文本合并
+   （6）normalize 处理文档中的文本节点，在后代节点找到空文本删除，两个相邻文本合并
 2. Document 类型
    （1）document 是 HTMLDocument 对象的实例也是 window 的一个属性，具备以下特性：
 
@@ -42,3 +44,39 @@
    （6）使用属性访问对象属性，使用 getAttribute 访问自定义属性
    （7）通过点操作添加一个自定义属性，该属性不会自动成为元素的特性，getAttribute 无效
    （8）removeAttribute：彻底删除元素的特性，不仅清除特性的值也会删除特性
+   （9）createElement 创建节点，可以添加更多子节点及执行其它操作
+4. Text 类型
+   （1）文本节点，包含可以照字面解释的纯文本内容，可以是转义后的 html 字符，但不能包含 html 代码
+   （2）nodeType=3，nodeName=#text，nodeValue=文本包含内容，parentNode 是一个 Element，不支持子节点
+   （3）length 属性保存文本长度 nodeValue 与 data 数据相同
+   （4）createTextNode 创建文本节点
+   （5）normalize 可以用来合并一个元素下的多个文本节点
+   （6）splitText 可以将文本节点分割成两个，参数为位置（不包含），返回新文本节点
+5. comment 类型
+   （1）注释类型，nodeType=8，nodeName=#comment，nodeValue=注释的内容，parentNode 可能是 Document 或者 Element，不支持子节点
+   （2）也拥有 splitText 方法
+   （3）createComment 可以创建注释节点
+6. DocumentType 类型
+   （1）包含与文档 doctype 有关信息，nodeType=10，nodeName=doctype，nodeValue=null，parentNode=Document，不支持子节点
+   （2）有三个属性：name 文档类型名称；entities 文档类型描述的实体的 NameNodeMap 对象；notations 文档类型描述的符号的 NameNodeMap 对象
+7. DocumentFragment 类型
+   （1）在文档中没有对应的标记，nodeType=11，nodeValue=#document-fragment，nodeValue 和 parentNode 都=null，
+   （2）可以用来创建一个文档片段，使用 createDocumentFragment 创建实例,可以有效减少反复渲染，一次性添加
+8. Attrs 类型
+   （1）nodeType=2，nodeName=特性的名字，nodeValue=特性的值，parentsNode=null，不支持子节点
+   （2）三个属性 name、value、specified，其中 specified 是一个布尔值，区分特性是代码指定的还是默认的
+   （3）createAttribute 可以创建新的特性
+   （4）创建的特性通过 attributes 和 getAttributeNode 都会返回对应特性的 Attrs 节点，而 getAttribute 只返回特性值，
+   （5）建议使用 getAttribute、setAttribute、removeAttribute，更方便
+
+## 10.2 DOM 操作技术
+
+1. 动态脚本
+   （1）可以通过操作 html 的方式创建脚本或者创建引入脚本文件的 script 标签
+2. 动态样式
+   （1）加载外部样式文件的过程是异步的，与 js 加载没有固定的顺序，
+3. 操作表格
+   （1）感觉没没到过，而且应用场景不多
+4. 使用 NodeList
+   （1）NodeList、NamedNodeMap 和 HTMLCollection 都是动态的集合，实时地
+   （2）应该尽量减少 NodeList 的访问次数，因为每次访问 NodeList 都是基于文档的查询（性能消耗大），可以讲 NodeList 缓存下来
