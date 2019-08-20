@@ -1,10 +1,8 @@
-import Demo from './components/demo';
-import GtTransform from './components/gt-transform';
+import GtTransfer from './components/gt-transfer';
 
 const VueComponent = {
   install: function(Vue) {
-    Vue.component('demo', Demo);
-    Vue.component('gtTransform', GtTransform);
+    Vue.component('gtTransfer', GtTransfer);
   }
 };
 
@@ -14,4 +12,4 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default VueComponent;
 
-export { Demo, GtTransform };
+export { GtTransfer };

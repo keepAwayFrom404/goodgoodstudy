@@ -15,8 +15,7 @@
   },
   "cms": {
     "components": {
-      "demo": "demo",
-      "gtTransform": "gtTransform"
+      "GtTransfer": "gtTransfer"
     }
   },
   "devDependencies": {
