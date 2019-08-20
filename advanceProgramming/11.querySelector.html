@@ -7,10 +7,15 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="app"></div>
+    <div class="app app1" data-lee="lee" data-name="jiahua">
+      <a href="#">lee</a>
+    </div>
     <script>
-      const body = document.body.matchesSelector('.app');
-      console.log(body);
+      const body = document.body.querySelector('.app');
+      // const p = (document.createElement('p').innerHTML = 'hello world');
+      // console.log(p);
+      body.insertAdjacentHTML('afterend', '<p>Hello world!</p>');
+      document.body.scrollByLines(5);
     </script>
   </body>
 </html>

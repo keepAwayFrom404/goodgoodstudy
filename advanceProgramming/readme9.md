@@ -101,4 +101,42 @@
 ## 11.3 HTML5
 
 1. 与类相关的扩充：HTML4 开始 class 用的越来越多，因此 HTML5 增加了很多类的操作方法
-   （1）getElementsByClassName：接收一个参数，包含一个或者多个类名的字符串
+   （1）getElementsByClassName：
+   - 接收一个参数，包含一个或者多个类名的字符串，传入类名的先后顺序不重要，
+   - 在元素上调用只会返回后代包含元素，
+   - 也存在与返回 NodeList 的其它方法相同的性能问题
+     （2）classList：
+
+- add：将给定的字符串添加到列表中，已存在就不添加
+- contains：列表中是否存在给定的值，存在返回 true，不存在返回 false
+- remove：从列表删除给定字符串
+- toggle：如果列表存在给定的值就删除，没有则添加
+
+2. 焦点管理
+   （1）activeElement 属性始终引用 Dom 当前获取焦点的元素
+   （2）hasFocus 方法判断文档是否获得了焦点，返回布尔值
+3. HTMLDocument
+   （1）readyState 属性：类似 onload
+
+- loading：正在加载文档
+- complete：文档加载完成
+  （2）兼容模式：document.compatMode
+- CSS1Compat：标准模式
+- BackCompat：混杂模式
+  （3）document.head：引用文档的 head 元素
+
+4. 字符集属性
+   （1）document.charset：文档中实际使用的字符集
+   （2）document.defaultCharset：默认字符集
+5. 自定义数据属性
+   （1）可以添加任意非标准属性，以 data-开头即可，为元素提供与渲染无关的信息，或者提供语意信息
+   （2）可以通过元素的 dataset 属性访问自定义属性的值（DOMStringMap 实例）
+6. 插入标记
+   （1）innerHTML：读模式下，可以获取调用元素的所有子节点对应的 HTML 标记；在写模式下会根据指定的值创建一个新的 DOM 树并替换掉元素原先的所有子节点，兼容性与表现各不一致
+   （2）outerHTML：读模式下，返回调用它的元素及所有子节点的 HTML 标签，写模式下，根据指定内容创建新的 DOM 子树，然后替换掉调用元素
+   （3）insertAdjacentHTML：两个参数：插入位置（beforebegin 当前元素前插入一个紧邻的同辈元素、afterbegin 在当前元素下插入新子元素或者在第一个子元素之前插入新的子元素、beforeend 在当前元素下插入新子元素或者在最后一个子元素之后插入新的子元素、afterend 当前元素之后插入一个紧邻的同辈元素）之一；第二个参数是 HTML 字符串
+   （4）使用标记插入的方法会存在性能问题，删除了元素但是方法不会取出，占用内存，所以最好先手工删除要被替换的元素的事件处理程序和 js 对象属性
+   （5）减少对 innerHTML 的赋值，可以先拼接最后一次赋值
+7. scrollIntoView：可以在所有的 HTML 元素上调用，通过滚动浏览器窗口或者某个容器元素，调用元素就可以出现在视口中。
+   （1）传 true 或者什么都不传，窗口滚动之后会让调用元素的顶部与视口顶部尽可能平齐+
+   （2）传 false，调用元素会尽可能全部出现在视口中（可能的话，调用元素底部会与视口平齐）
