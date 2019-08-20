@@ -1,0 +1,31 @@
+{
+  "name": "demo-components-obj",
+  "main": "src/index.js",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "vue-cli-service build --target lib --name demo-components-obj src/index.js"
+  },
+  "src:main": "src/index.js",
+  "dependencies": {
+    "element-ui": "^2.4.1",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.5.17",
+    "vue-pcms": "^1.0.1-ci.22"
+  },
+  "cms": {
+    "components": {
+      "demo": "demo",
+      "gtTransform": "gtTransform"
+    }
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-service": "^3.0.1",
+    "codemirror": "^5.48.2",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
