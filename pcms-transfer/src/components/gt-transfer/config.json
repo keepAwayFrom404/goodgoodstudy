@@ -1,0 +1,14 @@
+{
+  "hotTop": 10,
+  "maxLength": 5,
+  "checkedTipText": "",
+  "categoryBtnShow": true,
+  "panelTitle": {
+    "leftPanel": {
+      "defaultText": "热门APP",
+      "searchText": "搜索结果",
+      "categoryText": "APP分类"
+    }
+  },
+  "beforeLeftCheckChangeValidate": false
+}
