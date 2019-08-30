@@ -153,3 +153,50 @@
    （1）任何支持 style 的 HTML 元素在 js 中都有一个对应的 style 属性，是一个 CSSStyleDeclaration 实例，包含通过 style 特性指定的所有样式信息，不包含外部样式表或嵌入样式表经层叠而来的样式。
    （2）短划线要换成驼峰才能通过 js 访问
    （3）float 不能转换，是 js 保留字。dom2 中使用 cssFloat、styleFloat（IE）
+   （4）style 的 cssText 属性返回 style 的全部内容，可以快速复写样式
+   （5）length 属性可以得到一共设置了多少 style 样式，可用于遍历所有 style 样式名（style[i]或者 style.item(i)），接着使用 getPropertyValue 获取属性值
+   （6）益处某个属性直接使用 removeProperty 方法，移除属性之后该属性会使用默认值
+   （7）对于计算的样式使用 getComputedStyle 方法，接收要取得计算样式的元素和一个为元素字符串，返回一个 CSSStyleDeclaration 对象包含了该元素的所有计算样式
+   （8）计算后的样式属性只可读不可修改
+2. 操作样式表
+   （1）几乎没用过，是否过时了
+3. 元素大小
+   （1）偏移量：
+
+- offsetHeight：元素在垂直方向上占用的空间大小，包括元素高度，可见的水平滚动条高度、上下边框高度
+- offsetWidth：元素水平方向占用空间的大小，包括元素的宽度、可见垂直滚动条的宽度、左右边框的宽度
+- offsetLeft：元素的左外边框至包含元素的左内边框之间的像素距离
+- offsetTop：元素的上外边框至包含元素的上内边框之间的像素距离
+- 只可读，每次访问都要重新计算，性能低
+  （2）客户区大小
+- 元素内容及其内边距所占据的空间大小
+- clientWidth：内容区宽度加上左右内边距宽度
+- clientHeight：内容区高度加上上下内边距高度
+- 也是可读的，每次访问重新计算
+  （3）滚动大小
+- 包含滚动内容元素的大小
+- scrollHeight：在没有滚动条的情况下等于元素内容的总高度
+- scrollWidth：在没有滚动条的情况下，等于元素不内容的总宽度
+- scrollLeft：被隐藏在内容区域左侧的像素数，通过设置可以改变滚动的位置
+- scrollTop：被隐藏在内容区域上方的像素数，通过设置可以改变滚动的位置
+  （4）确定元素大小
+  getBoundingClientRect：返回四个点坐标
+
+## 12.3 遍历
+
+1. NodeIterator
+   （1）使用 document.createNodeIterator 创建它的实例，接收四个参数：root（作为搜索起点的树中的节点）、whatToShow（要访问节点的数字代码）、filter（一个 NodeFilter 对象，或者一个表示需要接受还是拒绝某些特定节点的函数）、entityReferenceExpansion（布尔值，是否要拓展实体引用）
+2. TreeWalker
+   （1）TreeWalker 是 NodeIterator 的升级版本，除了 nextNode 和 previousNode 外还提供了很多不同方向遍历 dom 结构的方法
+
+- parentNode：遍历到当前节点的父节点
+- firstChild：遍历到当前节点的第一个子节点
+- lastChild：遍历到当前节点的最后一个子节点
+- nextSibling：遍历到当前节点的下一个兄弟同辈节点
+- previousSibling：遍历到当前节点的上一个兄弟同辈节点
+  （2）使用 document.createTreeWalker 创建，接受参数与 NodeIterator 类似
+  （3）currentNode 属性，表示任何遍历方法在上一次遍历中返回的节点。也可以修改遍历继续进行的起点
+
+## 12.4 范围
+
+1. DOM 中的范围（东西太多，使用场景不明确，跳过了，需要在看）

@@ -5,14 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <style>
+      #myDiv {
+        background-color: blue;
+        width: 100px;
+        height: 200px;
+      }
+    </style>
   </head>
   <body>
-    <div class="app"></div>
+    <div id="div1">
+      <p>
+        <b>hello</b>
+        world!
+      </p>
+      <ul>
+        <li>list item 1</li>
+        <li>list item 2</li>
+        <li>list item 3</li>
+      </ul>
+    </div>
     <script>
-      const app = document.querySelector('.app');
-      app.style.width = '200px';
-      app.style.height = '200px';
-      app.style.background = 'red';
+      const div = document.querySelector('#div1');
+      const filter = function(node) {
+        return node.tagName.toLowerCase() === 'li'
+          ? NodeFilter.FILTER_ACCEPT
+          : NodeFilter.FILTER_SKIP;
+      };
+      const iterator = document.createNodeIterator(
+        div,
+        NodeFilter.SHOW_ELEMENT,
+        filter,
+        false
+      );
+      let node = iterator.nextNode();
+      while (node !== null) {
+        alert(node.tagName);
+        node = iterator.nextNode();
+      }
     </script>
   </body>
 </html>
