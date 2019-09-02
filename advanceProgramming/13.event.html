@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="myDiv">
+      <input type="text" value="Click Me" id="btn" />
+    </div>
+    <script>
+      const btn = document.querySelector('#btn');
+      btn.addEventListener('keyup', function(event) {
+        console.log(event.key);
+      });
+      // const handle = function(event) {
+      //   switch (event.type) {
+      //     case 'click':
+      //       alert('click');
+      //       break;
+      //     case 'mouseover':
+      //       event.target.style.backgroundColor = 'red';
+      //       break;
+      //     case 'mouseout':
+      //       event.target.style.backgroundColor = '';
+      //       break;
+      //   }
+      // };
+      // btn.onclick = handle;
+      // btn.onmouseover = handle;
+      // btn.onmouseout = handle;
+      // btn.onclick = function(event) {
+      //   alert('event click');
+      //   event.stopPropagation();
+      // };
+      // document.body.onresize = function(event) {
+      //   alert('resize');
+      // };
+    </script>
+  </body>
+</html>
