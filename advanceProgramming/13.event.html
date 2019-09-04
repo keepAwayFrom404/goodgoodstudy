@@ -7,37 +7,46 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="myDiv">
-      <input type="text" value="Click Me" id="btn" />
+    <div id="myDiv">
+      Right click or Ctrl+click me to get a custom context menu. Click anywhere
+      else to get the default context menu.
     </div>
+    <ul
+      id="myMenu"
+      style="position:absolute;visibility:hidden;background-color:
+          silver"
+    >
+      <li><a href="http://www.nczonline.net">Nicholas􏿥 site</a></li>
+      <li><a href="http://www.wrox.com">Wrox site</a></li>
+      <li><a href="http://www.yahoo.com">Yahoo!</a></li>
+    </ul>
+    <input type="button" value="click" onclick="changeUrl()" />
     <script>
-      const btn = document.querySelector('#btn');
-      btn.addEventListener('keyup', function(event) {
-        console.log(event.key);
+      window.onload = event => {
+        const div = document.getElementById('myDiv');
+        const menu = document.getElementById('myMenu');
+        div.addEventListener('contextmenu', event => {
+          event.preventDefault();
+
+          menu.style.left = event.clientX + 'px';
+          menu.style.top = event.clientY + 'px';
+          menu.style.visibility = 'visible';
+        });
+        document.onclick = () => {
+          menu.style.visibility = 'hidden';
+        };
+      };
+      // window.addEventListener('beforeunload', function(event) {
+      //   const message = "I'm really going to miss you if you go.";
+      //   event.returnValue = message;
+      //   return message;
+      // });
+      function changeUrl() {
+        location.hash = 'lee';
+      }
+      window.addEventListener('hashchange', event => {
+        console.log(event.oldURL, event.newURL, 1454);
       });
-      // const handle = function(event) {
-      //   switch (event.type) {
-      //     case 'click':
-      //       alert('click');
-      //       break;
-      //     case 'mouseover':
-      //       event.target.style.backgroundColor = 'red';
-      //       break;
-      //     case 'mouseout':
-      //       event.target.style.backgroundColor = '';
-      //       break;
-      //   }
-      // };
-      // btn.onclick = handle;
-      // btn.onmouseover = handle;
-      // btn.onmouseout = handle;
-      // btn.onclick = function(event) {
-      //   alert('event click');
-      //   event.stopPropagation();
-      // };
-      // document.body.onresize = function(event) {
-      //   alert('resize');
-      // };
     </script>
   </body>
 </html>

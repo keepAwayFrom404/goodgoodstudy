@@ -316,4 +316,64 @@
    （6）charCode 属性只有在发生 keypress 事件才有值
    （7）DOM3 级变化：不在包含 charCode，取而代之 key（相应的文本）和 char（按下字符键与 key 相同，非字符键为 null）
    （8）textInput：只有在可编辑区域才能触发；只有用户按下能够输入实际字符的键时才会被触发，包含 data 属性，包含用户输入的字符而非编码
-   （9）inputMethod：0 不知道；1 键盘；2 粘贴；3 拖放；4IME；5 表单选择某项；6 手写；7 语音；8 几种方式组合；9 脚本 5.复合事件 402
+   （9）inputMethod：0 不知道；1 键盘；2 粘贴；3 拖放；4IME；5 表单选择某项；6 手写；7 语音；8 几种方式组合；9 脚本
+5. 变动事件：在 DOM 某部分发生变化时给出提示
+   （1）DOMSubtreeModified：dom 结构发生任何变化都会触发，在任何事件触发时都会触发
+   （2）DOMNodeInserted：一个节点作为子节点插入到其他节点触发
+   （3）DOMNodeRemoved：节点从其父节点移除
+   （4）DOMNodeInsertedIntoDocument：节点被直接插入文档或者通过子树间接插入文档触发，在 DOMNodeInserted 之后
+   （5）DOMNodeRemovedFromDocument：节点被直接从文档移除或者通过子树间接从文档移除触发，在 DOMNodeRemoved 之后
+   （6）DOMAttrModified：特性被修改触发
+   （7）DOMCharacterDataModified：文本节点值变化触发
+   （8）使用 removeChild 或 replaceChild 删除节点，首先触发 DOMNodeRemoved，event 的 target 等于目标节点，relatedNode 属性包含对父节点的引用，该事件会冒泡，可以在 dom 的任何层次处理；如果包含子节点在其子节点和自己上会相继触发 DOMNodeRemovedFromDocument 事件，不会冒泡，只能指定某个移除节点接收；接着触发 DOMSubtreeModified，目标是被移除节点的父节点
+   （9）使用 appendChild、replaceChild、insertBefore 插入节点，首先触发 DOMNodeInserted 事件，目标是插入的节点，relatedNode 包含父节点引用，冒泡的；接着在新节点触发 DOMNodeInsertedIntoDocument，不冒泡；最后触发 DOMSubtreeModified，目标是父节点
+6. HTML5 事件
+   （1）contextmenu 事件可用于自定义鼠标右击显示信息
+   （2）beforeunload 事件可以阻止用户卸载页面，比如警告表单信息不会保存是否退出等,需要将 event 的 returnValue 的值设置为希望用户看到的信息同时作为函数的返回值
+   （3）DOMContentLoaded 事件在 dom 树形成之后触发，不等待资源加载，意味着用户可以尽早与页面进行交互，可以为 window 或者 document 添加该事件，会冒泡，实际目标是 documnet，始终在 load 事件前触发
+   （4）readystatechange 事件可以用来检测外部 js 或者 css 加载完毕，有五个状态（uninitialized：未初始化、loading、loaded、interactive：交互、complete），但是并不会完全按照顺序触发，主要检测目标的 readyState 属性是否为 loaded 或者 complete 都可以表示资源可用了，然后卸载该事件防止多次触发
+   （5）hashchange 事件在 URL 的参数列表（及 URL 中#号后面的所有字符串）发生变化时触发，必须把事件绑定在 window 上，event 包含 oldURL 和 newURL 两个属性保存完整 URL
+7. 设备事件
+   （1）Safari 移动端支持 orientationchange 事件和 window.orientation 属性都表示设备的状态，所有 ios 都支持，0 表示正常模式，90 表示向左横向，-90 向右横向
+8. 触摸事件
+   （1）touchstart：手触摸屏幕触发，即使已经有一个手指在屏幕上也会触发
+   （2）touchmove：手指滑动连续触发，调用 preventDefault 可以阻止滚动
+   （3）touchend：手指离开触发
+   （4）touchcancel：系统停止跟踪触摸时触发
+   （5）以上事件都冒泡，也可以取消，都是以兼容 dom 的方式实现的包含鼠标事件常见的属性还包括三个用于跟踪触摸的属性：
+
+- touches：当前跟踪的触摸操作的 Touch 数组
+- targetTouches：特定于事件目标的 Touch 对象数组
+- changeTouches：自上次触摸以来发生了什么改变的 Touch 对象数组
+- 每个 Touch 对象包含以下属性：clientX 目标在视口 x 坐标、clientY 目标在视口 y 坐标、identifier 触摸唯一 ID、pageX 页面 x、pageY 页面 y、screenX 屏幕中 x，screenY 屏幕中 y、target：触摸的 DOM 节点目标
+
+## 13.5 内存和性能
+
+（1）过多的事件处理函数会影响页面的征途运行性能。因为每个函数都是对象都会占用内存，内存中的对象越多性能越差；必须事先指定所有的事件处理程序而导致 DOM 访问次数会延迟整个页面的交互就绪时间
+
+1. 事件委托
+   （1）利用冒泡，只指定一个事件处理程序就能管理某一类型的所有事件。
+   （2）只需要在 DOM 树中尽量最高的层次上添加一个事件处理程序
+   （3）可以为 document 添加某类特定类型的事件：document 对象很快可以访问，可以在页面周期任何时间点为它添加事件处理程序（无需等待 load 事件）只要元素呈现出来就具备了适当的功能；DOM 访问少；占用内存空间少
+   （4）适合使用事件委托的事件：click、mousedown、mouseup、keydown、keyup 、 keypress。
+2. 移除事件处理程序
+   （1）内存中过时不用的空事件处理程序也会影响网页的性能
+   （2）在移除 dom 或者使用 innerHTML 时，元素上的事件未移除不会当作垃圾回收
+   （3）删除按钮能阻止事件冒泡，目标元素存在于文档中是事件冒泡的前提
+   （4）导致空事件处理函数另一个场景在卸载页面的时候，可以在 onunload 事件处理程序触发时移除所有的事件处理程序，这时候使用事件委托跟踪的事件少移除就比较容易
+   （5）使用 onunload 以为页面不会缓存在 bfcache 中
+
+## 13.6 模拟事件
+
+（1）事件就是网页中某个值得关注的瞬间。
+
+1. DOM 中的事件模拟
+   （1）鼠标事件使用 createEvent 传入 MouseEvents，键盘事件使用 createEvent 传入 KeyboardEvent，变动事件传入 MutationEvents，HTML 事件传入 HTMLEvents，自定义事件 CustomEvent
+
+## 13.7 小结
+
+（1）在使用事件时，需要考虑以下的一些内存和性能方面的问题
+
+- 有必要限制一个页面中的事件处理程序的数量，事件太多会占用大量内存，页面反应不灵敏
+- 事件委托可以有效的减少事件处理程序的数量
+- 建议在浏览器卸载页面之前移除页面中的所有事件处理程序

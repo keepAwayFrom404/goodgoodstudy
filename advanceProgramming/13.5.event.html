@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <ul id="myLinks">
+      <li id="goSomewhere">Go somewhere</li>
+      <li id="doSomething">Do something</li>
+      <li id="sayHi">Say hi</li>
+    </ul> -->
+    <div id="myDiv">
+      <input type="button" value="Click Me" id="myBtn" />
+    </div>
+    <script>
+      // const list = document.querySelector('#myLinks');
+      // list.addEventListener('click', event => {
+      //   switch (event.target.id) {
+      //     case 'doSomething':
+      //       document.title = "I changed the document's title";
+      //       break;
+      //     case 'goSomewhere':
+      //       location.href = 'www.baidu.com';
+      //       break;
+      //     case 'sayHi':
+      //       alert('Hi');
+      //       break;
+      //   }
+      // });
+      const btn = document.querySelector('#myBtn');
+      // btn.addEventListener('click', e => {
+      //   btn.onclick = null;
+      //   document.getElementById('myDiv').innerHTML = 'Processing...';
+      const event = document.createEvent('MouseEvents');
+      event.initMouseEvent(
+        'click',
+        true,
+        true,
+        document.defaultView,
+        0,
+        0,
+        0,
+        0,
+        0,
+        false,
+        false,
+        false,
+        false,
+        0,
+        null
+      );
+      btn.dispatchEvent(event);
+      btn.addEventListener('event', e => {
+        console.log(e, 111);
+      });
+      // });
+    </script>
+  </body>
+</html>
