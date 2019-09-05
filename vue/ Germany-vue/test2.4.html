@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <style>
+    #effect {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+    }
+    .highlight {
+      background-color: red;
+    }
+    .shrink {
+      background-color: yellow;
+    }
+    .baseClass {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+    }
+    .font {
+      font-size: 20px;
+    }
+    .process-bar {
+      width: 200px;
+      height: 20px;
+      border: 1px solid black;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <h4>第一题</h4>
+      <button @click="startEffect">start effect</button>
+      <div id="effect" :class="effectStart?effectClass:''"></div>
+      <hr />
+      <h4>第二题</h4>
+      <div :class="[fontClass, 'baseClass', { highlight: effectStart }]">
+        I got no class :(
+      </div>
+      <hr />
+      <h4>第三题</h4>
+      <input type="text" v-model="customClass" />
+      <div :class="customClass">there is content</div>
+      <hr />
+      <h4>第四题</h4>
+      <input type="text" v-model="userClass" />
+      <input type="text" v-model="isCustomClass" />
+      <div :class="['baseClass', addUserClass?userClass:'' ]">
+        there is content
+      </div>
+      <hr />
+      <h4>第五题</h4>
+      width:
+      <input type="text" v-model="myStyle.width" />
+      height:
+      <input type="text" v-model="myStyle.height" />
+      bgColor:
+      <input type="text" v-model="myStyle.backgroundColor" />
+      <div :style="customStyle"></div>
+      <hr />
+      <h4>第六题</h4>
+      <button @click="startProgress">start progress</button>
+      <div :class="['process-bar']">
+        <div :style="progressBar"></div>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data() {
+          return {
+            effectStart: false,
+            effect: false,
+            fontClass: 'font',
+            customClass: '',
+            userClass: '',
+            isCustomClass: '',
+            myStyle: {
+              width: 20,
+              height: 20,
+              backgroundColor: 'red'
+            },
+            progressBar: {
+              width: 0 + 'px',
+              height: '100%',
+              'background-color': 'red'
+            }
+          };
+        },
+        computed: {
+          effectClass() {
+            return this.effect ? 'highlight' : 'shrink';
+          },
+          addUserClass() {
+            return this.isCustomClass === 'true';
+          },
+          customStyle() {
+            return {
+              width: this.myStyle.width + 'px',
+              height: this.myStyle.height + 'px',
+              'background-color': this.myStyle.backgroundColor
+            };
+          }
+        },
+        methods: {
+          startEffect() {
+            this.effectStart = true;
+            setInterval(() => {
+              this.effect = !this.effect;
+            }, 500);
+          },
+          startProgress() {
+            const timer = setInterval(() => {
+              this.progressBar.width += 20;
+            }, 500);
+            if (this.this.progressBar.width === 200) clearInterval(timer);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

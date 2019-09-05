@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="value+=5">Add 5</button>
+      <button @click="value+=1">Add 1</button>
+      <p>{{ value }}</p>
+      <p>{{ result }}</p>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          value: 0
+        };
+      },
+      computed: {
+        result() {
+          return this.value > 3 ? 'stop' : 'go on';
+        }
+      },
+      methods: {},
+      watch: {
+        result() {
+          setTimeout(() => {
+            console.log(this);
+          }, 1000);
+        }
+      }
+    });
+  </script>
+</html>

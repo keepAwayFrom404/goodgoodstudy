@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ age * 3 }}</p>
+      <hr />
+      <p>{{ randomNum(100) }}</p>
+      <hr />
+      <img :src="imgUrl" alt="" />
+      <hr />
+      <input type="text" v-model="name" />
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          name: 'lijiahua',
+          age: 22,
+          imgUrl: '../../1.jpeg'
+        };
+      },
+      methods: {
+        randomNum(n) {
+          return (Math.random(0, 1) * n).toFixed();
+        }
+      }
+    });
+  </script>
+</html>
