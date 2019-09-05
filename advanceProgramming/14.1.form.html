@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./EventUtil.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <form method="POST" name="form1">
+    <input type="text">
+  </form>
+
+  <script>
+    const form1 = document.forms['form1']
+    const input = form1.elements[0]
+    EventUtil.addHandler(input, 'focus', e => {
+      if (e.target.style.backgroundColor !== 'red') {
+        e.target.style.backgroundColor = 'yellow'
+      }
+    })
+
+    EventUtil.addHandler(input, 'blur', e => {
+      if (/[^\d]/.test(e.target.value)) {
+        e.target.style.backgroundColor = 'red'
+      } else {
+        e.target.style.backgroundColor = ''
+      }
+    })
+
+    input.addEventListener('input', function (e) {
+      console.log('done')
+      if (/[^\d]/.test(e.target.value)) {
+        e.target.style.backgroundColor = 'red'
+      } else {
+        e.target.style.backgroundColor = ''
+      }
+    })
+    // EventUtil.addHandler(input, 'change', e => {
+
+    // })
+  </script>
+</body>
+
+</html>
