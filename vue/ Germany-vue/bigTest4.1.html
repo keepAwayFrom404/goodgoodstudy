@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>little game</title>
+    <style>
+      #app {
+        position: relative;
+        width: 100%;
+        display: flex;
+        font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        flex-direction: column;
+        align-items: center;
+      }
+      .blood-container {
+        display: flex;
+        justify-content: space-around;
+        width: 800px;
+        margin-bottom: 20px;
+      }
+      .blood-item {
+        text-align: center;
+      }
+      .blood {
+        margin-top: 30px;
+        width: 300px;
+        height: 30px;
+        line-height: 30px;
+        background: #c9c9c9;
+      }
+      .blood-progress {
+        height: 100%;
+        background-color: green;
+        transition: width 500ms;
+      }
+      .blood-progress-danger {
+        height: 100%;
+        background-color: red;
+      }
+
+      .btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 800px;
+        height: 70px;
+        border: 1px solid #cccccc;
+        box-shadow: 0 2px 2px #ccc;
+      }
+      .btn {
+        height: 34px;
+        margin-right: 20px;
+        border-width: 2px;
+        border-radius: 4px;
+      }
+      .start {
+        background-color: #befdb7;
+      }
+      .attack {
+        background-color: red;
+      }
+      .specialAttack {
+        background-color: #f3af56;
+      }
+      .heal {
+        background-color: #bdfdb9;
+      }
+      .giveUp {
+        background-color: #fff;
+      }
+
+      .monsterAttack {
+        background-color: pink;
+        color: red;
+      }
+      .userAttack {
+        background-color: #e7e4ff;
+        color: blue;
+      }
+      .userAddBlood {
+        background-color: #bdfdb9;
+        color: green;
+      }
+      .userGiveUp {
+        background-color: #fff;
+      }
+
+      .output-container {
+        width: 800px;
+        margin-top: 20px;
+        border: 1px solid #cccccc;
+        box-shadow: 0 2px 2px #ccc;
+      }
+      .output-ul {
+        margin: 20px 60px;
+        list-style: none;
+      }
+      .output-li {
+        margin-bottom: 6px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="blood-container">
+        <div class="blood-item">
+          <h2>{{ user.name }}</h2>
+          <div class="blood">
+            <div
+              v-if="user.blood>0"
+              :class="user.blood<=20?'blood-progress-danger':'blood-progress'"
+              :style="`width: ${userWidth}`"
+            >
+              {{ user.blood }}
+            </div>
+            <div v-else>K.O</div>
+          </div>
+        </div>
+        <div class="blood-item">
+          <h2>{{ monster.name }}</h2>
+          <div class="blood">
+            <div
+              v-if="monster.blood>0"
+              :class="monster.blood<=20?'blood-progress-danger':'blood-progress'"
+              :style="`width: ${monsterWidth}`"
+            >
+              {{ monster.blood }}
+            </div>
+            <div v-else>K.O</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <template v-if="!isPlaying">
+          <button class="btn start" @click="startGame">Start new game</button>
+        </template>
+        <template v-else>
+          <button class="btn attack" @click="attack(1,10)">ATTACK</button>
+          <button class="btn specialAttack" @click="specialAttack(10,20)">
+            SPECIAL ATTACK
+          </button>
+          <button class="btn heal" @click="heal">HEAL</button>
+          <button class="btn giveUp" @click="giveUp">GIVE UP</button>
+        </template>
+      </div>
+
+      <div class="output-container" v-if="messageList.length">
+        <ul class="output-ul">
+          <li
+            :class="[messageItem.type, 'output-li']"
+            v-for="(messageItem, index) in messageList"
+            :key="index"
+          >
+            {{ messageItem.msg }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          isPlaying: false,
+          user: {
+            name: '',
+            blood: 100
+          },
+          monster: {
+            name: 'MONSTER',
+            blood: 100
+          },
+          messageList: []
+        };
+      },
+      computed: {
+        userWidth() {
+          return this.user.blood + '%';
+        },
+        monsterWidth() {
+          return this.monster.blood + '%';
+        }
+      },
+      mounted() {
+        const username = prompt('请输入您的名字：');
+        this.user.name = username || 'PLAYER';
+      },
+      methods: {
+        startGame() {
+          this.isPlaying = true;
+          this.user.blood = 100;
+          this.monster.blood = 100;
+          this.messageList = [];
+        },
+        attack(min, max) {
+          this.monsterAttacks();
+
+          const userAttack = this.caculateDamage(min, max);
+          this.monster.blood -= userAttack;
+          this.addRoundMsg(userAttack, 'userAttack');
+          setTimeout(() => {
+            this.checkWin();
+          }, 0);
+        },
+        specialAttack(min, max) {
+          this.attack(min, max);
+        },
+        heal() {
+          if (this.user.blood <= 90) {
+            this.user.blood += 10;
+          } else {
+            this.user.blood = 100;
+          }
+          this.addRoundMsg(10, 'userAddBlood');
+
+          this.monsterAttacks();
+        },
+        giveUp() {
+          this.isPlaying = false;
+        },
+        monsterAttacks() {
+          const monsterAttack = this.caculateDamage(5, 12);
+          this.user.blood -= monsterAttack;
+          this.addRoundMsg(monsterAttack, 'monsterAttack');
+          setTimeout(() => {
+            if (this.checkWin()) return;
+          }, 0);
+        },
+        caculateDamage(min, max) {
+          return Math.max(Math.floor(Math.random() * max) + 1, min);
+        },
+        checkWin() {
+          if (this.user.blood <= 0) {
+            if (confirm('Monster WIN! Try again?')) {
+              this.startGame();
+            } else {
+              this.isPlaying = false;
+            }
+            return true;
+          } else if (this.monster.blood <= 0) {
+            if (confirm('You WIN! Play again?')) {
+              this.startGame();
+            } else {
+              this.isPlaying = false;
+            }
+            return true;
+          } else {
+            return false;
+          }
+        },
+        addRoundMsg(num, type) {
+          const obj = {};
+          obj.type = type;
+          switch (type) {
+            case 'userAttack':
+              obj.msg = `PLAYER HITS MONSTER FOR ${num}`;
+              break;
+            case 'monsterAttack':
+              obj.msg = `MONSTER HITS PLAYER FOR ${num}`;
+              break;
+            case 'userAddBlood':
+              obj.msg = `PLAYER ADD BLOOD FOR ${num}`;
+              break;
+            case 'userGiveUp':
+              obj.msg = 'PLAYER GIVE UP';
+              break;
+          }
+          this.messageList.push(obj);
+        }
+      }
+    });
+  </script>
+</html>

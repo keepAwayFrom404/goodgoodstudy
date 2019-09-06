@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h4>第一题</h4>
+      <button @click="isShow = !isShow">Toggle</button>
+      <p v-if="isShow">you either see me</p>
+      <p v-else>or me</p>
+
+      <p v-show="isShow">you either see me</p>
+      <p v-show="!isShow">or me</p>
+      <hr />
+      <h4>第二题</h4>
+      <ul>
+        <li v-for="(element, index) in array">{{ element }}-{{ index }}</li>
+      </ul>
+      <hr />
+      <h4>第三题</h4>
+      <ul>
+        <li v-for="(v, k, i) in myObj">{{ v }}: {{ k }}-{{ i }}</li>
+      </ul>
+      <hr />
+      <h4>第四题</h4>
+      <ul>
+        <li v-for="(v, k, i) in testData">
+          <template v-if="Array.isArray(v)">
+            <div v-for="(subV, subI) in v">{{ subV }}-{{ subI }}</div>
+          </template>
+          <template v-else>
+            {{ k }}: {{ v }}-{{ i }}
+          </template>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          isShow: true,
+          array: ['max', 'anna', 'chris', 'niu'],
+          myObj: {
+            title: 'hello vue',
+            author: 'lee',
+            book: '3'
+          },
+          testData: {
+            name: 'lee',
+            data: [1.62, 1.2, 6.3, 8.4, 2.21]
+          }
+        };
+      },
+      methods: {}
+    });
+  </script>
+</html>
