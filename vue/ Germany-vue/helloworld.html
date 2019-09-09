@@ -9,26 +9,28 @@
   </head>
   <style></style>
   <body>
-    <div id="app">
-      <ul>
-        <li v-for="person in persons">
-          <div v-for="(v, k, i) in person">{{ v }}: {{ k }} ({{ i }})</div>
-          <br />
-        </li>
-      </ul>
+    <div id="app1">
+      <gt-cmp></gt-cmp>
     </div>
 
     <script>
-      new Vue({
-        el: '#app',
+      const myCmp = {
+        template: `<h1>lijiahua {{msg}}</h1>`,
         data() {
           return {
-            showMe: true,
-            persons: [
-              { name: 'lee', age: 22, color: 'red' },
-              { name: 'zhi', age: 33, color: 'yellow' }
-            ]
+            msg: 'good'
           };
+        }
+      };
+      const vm1 = new Vue({
+        el: '#app1',
+        data() {
+          return {
+            title: 'the vue instance'
+          };
+        },
+        components: {
+          'gt-cmp': myCmp
         }
       });
     </script>
