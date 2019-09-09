@@ -51,6 +51,19 @@ var EventUtil = {
     }
   },
 
+  getClipboardText: function (event) {
+    const clipboardData = (event.clipboardData || window.clipboardData)
+    return clipboardData.getData('text')
+  },
+
+  setClipboardText: function (event, value) {
+    if (event.clipboardData) {
+      return event.clipboardData.setData('text/plain', value)
+    } else if (window.clipboardData) {
+      return window.clipboardData.setData('text', value)
+    }
+  },
+
   removeHandler: function (element, type, handler) {
     if (element.removeEventListener) {
       element.removeEventListener(type, handler, false);

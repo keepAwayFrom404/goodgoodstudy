@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="#" method="post">
+    <input type="text" id="input1" maxlength="2">
+    <input type="text" id="input2" maxlength="3">
+    <input type="text" id="input3" maxlength="4">
+    <input type="number" id="input4" maxlength="4">
+  </form>
+</body>
+<script>
+  function tabForward(e) {
+    if (String(e.target.value).length == e.target.maxLength) {
+      const form = e.target.form
+      for (let i = 0; i < form.elements.length; i++) {
+        if (form.elements[i] == e.target) {
+          if (form.elements[i + 1]) {
+            form.elements[i + 1].focus()
+          }
+          return
+        }
+
+      }
+    }
+  }
+
+  const input1 = document.querySelector('#input1')
+  const input2 = document.querySelector('#input2')
+  const input3 = document.querySelector('#input3')
+
+  input1.addEventListener('keyup', tabForward)
+  input2.addEventListener('keyup', tabForward)
+  input3.addEventListener('keyup', tabForward)
+</script>
+
+</html>
