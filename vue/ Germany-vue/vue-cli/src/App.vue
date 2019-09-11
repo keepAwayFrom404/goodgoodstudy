@@ -1,45 +1,89 @@
 <template>
   <div id="app">
-    <el-button type="primary" class="btn " @click="currentCom = 'app-blue'">
-      load blue template
-    </el-button>
-    <el-button type="success" class="btn " @click="currentCom = 'app-green'">
-      load green template
-    </el-button>
-    <el-button type="danger" class="btn " @click="currentCom = 'app-red'">
-      load red template
-    </el-button>
+    <!-- <h1>Quotes Addad</h1>
+    <quote-progress
+      :totalNum="totalNum"
+      :maxNum="maxNum"
+      :progress="progress"
+    ></quote-progress>
+    <quote-input @addQuote="handleAddQuote"></quote-input>
+    <quote-list
+      :quoteList="quoteList"
+      @changeProgress="deleteItem"
+    ></quote-list>
+    <div class="footer-tip">Info: Click on a Quote to delete it.</div>
+    <custom-switch
+      :value="switchType"
+      @input="switchType = $event"
+    ></custom-switch> -->
+    <!-- <form-test></form-test> -->
+    <p v-text="'hello world'"></p>
+    <p v-html="'<strong>hello world</strong>'"></p>
     <hr />
-    <component :is="currentCom">
-      <template v-slot:header
-        ><h1>{{ currentCom }} header</h1>
-      </template>
-      <template v-slot:main
-        ><p>{{ currentCom }} main</p>
-      </template>
-      <template v-slot:footer
-        >{{ currentCom }} footer
-      </template>
-    </component>
+    <p v-myon:click="addNum">Click</p>
+    <p>{{ totalNum }}</p>
   </div>
 </template>
 
 <script>
-import Blue from './components/test8/blue';
-import Red from './components/test8/red';
-import Green from './components/test8/green';
+import QuoteProgress from './components/bigTest2/quote-progress';
+import QuoteInput from './components/bigTest2/quote-input';
+import QuoteList from './components/bigTest2/quote-list';
+import CustomSwitch from './components/custom-switch';
+import FormTest from './components/test11/form-test';
 export default {
   data() {
     return {
-      currentCom: 'app-blue'
+      totalNum: 0,
+      maxNum: 10,
+      quoteList: [],
+      switchType: true
     };
   },
   components: {
-    'app-blue': Blue,
-    'app-red': Red,
-    'app-green': Green
+    QuoteInput,
+    QuoteList,
+    QuoteProgress,
+    CustomSwitch,
+    FormTest
+  },
+  computed: {
+    progress() {
+      return (this.totalNum / this.maxNum) * 100 + '%';
+    }
+  },
+  methods: {
+    addNum() {
+      this.totalNum++;
+    },
+    handleAddQuote(e) {
+      if (this.quoteList.length >= this.maxNum) {
+        alert(`最多可输入${this.maxNum}条名言`);
+        return false;
+      }
+      this.quoteList.push(e);
+      this.totalNum++;
+    },
+    deleteItem() {
+      this.totalNum--;
+    }
   }
 };
 </script>
 <style>
+#app {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-tip {
+  width: 1000px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  border-radius: 2px;
+  background: #dbeef4;
+}
 </style>
