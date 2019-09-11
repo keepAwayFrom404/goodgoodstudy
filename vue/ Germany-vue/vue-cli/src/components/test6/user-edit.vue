@@ -11,5 +11,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style >
+.user-edit {
+  width: 400px;
+  height: 150px;
+  background: greenyellow;
+}
 </style>
