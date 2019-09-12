@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="post">
+      <select multiple name="location" id="selLocation">
+        <option value="Sunnyvale, CA">Sunnyvale</option>
+        <option value="Los Angeles, CA">Los Angeles</option>
+        <option value="Mountain View, CA">Mountain View</option>
+        <option value="">China</option>
+        <option>Australia</option>
+      </select>
+    </form>
+    <script>
+      const selectBox = document.forms[0].elements['location'];
+      selectBox.addEventListener('change', () => {
+        console.log(selectBox.selectedIndex);
+      });
+
+      const first = selectBox.options[4].text;
+      console.log(first);
+    </script>
+  </body>
+</html>
