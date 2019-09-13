@@ -77,3 +77,33 @@
 - componentUpdate：一旦组件更新完，包括子组件
 - unbind：指令移除时调用
 - bind 和 update 是最常用的两个钩子
+
+# 第十三章 过滤器和混入
+
+1. filter 可以在通过 Vue.filter 全局注册也可以使用组件的 filters 属性注册
+2. 计算属性的性能优于过滤器
+3. 混入的的内容只有在引用的实例中不存在才会添加，生命周期都会执行且混入对象的优先于组件内部的执行
+4. 组件混入可以使用 mixins 属性，全局混入一般在开发插件使用，身生产使用少使用 Vue.mixin，且全局混入会在所有 vue 实例执行包括 new Vue 中
+5. mixin 对象会被复制多份而不是共享的，把引入的 mixin 对象放入 data 中使用就是同一个对象会互相影响
+
+# 第十四章 使用过渡和动画
+
+1. transtion 元素只能给一个元素添加动画，一次放入多个元素会报错
+2. 默认以 v-开头的类名
+
+- -enter 在动画开始的一帧才添加到元素，下一帧就会被移除，一般用于设置初始状态
+- -enter-active 直到动画结束才会被移除
+- leave：离开时添加
+- leave-active：整个离开过程
+
+3. transition 的 type 属性可以用来规定使用 transition 的时间或者 animation 的时间
+4. transition 的 appear 属性可以加上初始动画（第一次进入）,只有使用默认动画（默认 css 类）时才会生效
+5. transition 存在 enter-calass 等属性可以覆盖默认的类名
+6. 在 transition 中 v-show 取反不能同时存在
+7. v-if 和 v-else 元素相同时 vue 只会替换内容不会替换元素，节省性能，可以添加 key 做区分
+8. transition 的 mode 属性可以选择新旧元素的进出顺序
+9. transition 钩子，done 函数告诉 vue 动画执行结束在 enter 和 leave 钩子内执行
+10. 使用 css 属性设置为 false 用 js 接管动画
+11. 动态组件也可以使用 transition 添加动画
+12. transition-group 会渲染成一个 dom 标签，默认为 span 可以通过 tag 属性修改，而 transition 不会渲染到 dom，
+13. transition-group 用法和 transition 一致，但是记得添加 key 值做区分，还有一个-move 类会被添加到需要改变位置的元素上

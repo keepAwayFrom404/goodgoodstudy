@@ -1,72 +1,28 @@
 <template>
   <div id="app">
-    <!-- <h1>Quotes Addad</h1>
-    <quote-progress
-      :totalNum="totalNum"
-      :maxNum="maxNum"
-      :progress="progress"
-    ></quote-progress>
-    <quote-input @addQuote="handleAddQuote"></quote-input>
-    <quote-list
-      :quoteList="quoteList"
-      @changeProgress="deleteItem"
-    ></quote-list>
-    <div class="footer-tip">Info: Click on a Quote to delete it.</div>
-    <custom-switch
-      :value="switchType"
-      @input="switchType = $event"
-    ></custom-switch> -->
-    <!-- <form-test></form-test> -->
-    <p v-text="'hello world'"></p>
-    <p v-html="'<strong>hello world</strong>'"></p>
-    <hr />
-    <p v-myon:click="addNum">Click</p>
-    <p>{{ totalNum }}</p>
+    <transition name="reverse" mode="out-in">
+      <component
+        :is="currentCom"
+        @newQuestion="currentCom = 'super-quiz'"
+        @resultPage="currentCom = 'result-quiz'"
+        class="test"
+      ></component>
+    </transition>
   </div>
 </template>
 
 <script>
-import QuoteProgress from './components/bigTest2/quote-progress';
-import QuoteInput from './components/bigTest2/quote-input';
-import QuoteList from './components/bigTest2/quote-list';
-import CustomSwitch from './components/custom-switch';
-import FormTest from './components/test11/form-test';
+import SuperQuiz from './components/test14/super-quiz';
+import ResultQuiz from './components/test14/result-quiz';
 export default {
   data() {
     return {
-      totalNum: 0,
-      maxNum: 10,
-      quoteList: [],
-      switchType: true
+      currentCom: 'super-quiz'
     };
   },
   components: {
-    QuoteInput,
-    QuoteList,
-    QuoteProgress,
-    CustomSwitch,
-    FormTest
-  },
-  computed: {
-    progress() {
-      return (this.totalNum / this.maxNum) * 100 + '%';
-    }
-  },
-  methods: {
-    addNum() {
-      this.totalNum++;
-    },
-    handleAddQuote(e) {
-      if (this.quoteList.length >= this.maxNum) {
-        alert(`最多可输入${this.maxNum}条名言`);
-        return false;
-      }
-      this.quoteList.push(e);
-      this.totalNum++;
-    },
-    deleteItem() {
-      this.totalNum--;
-    }
+    SuperQuiz,
+    ResultQuiz
   }
 };
 </script>
@@ -78,12 +34,49 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.footer-tip {
-  width: 1000px;
-  height: 46px;
-  line-height: 46px;
+.tip {
+  width: 700px;
+  height: 80px;
+  line-height: 80px;
+  margin-top: 20px;
+  background: gold;
   text-align: center;
-  border-radius: 2px;
-  background: #dbeef4;
+}
+.test {
+  transform: rotateY(0deg);
+}
+.reverse-enter {
+}
+.reverse-enter-active {
+  animation: reverse-in 2s ease-out forwards;
+}
+.reverse-leave {
+}
+.reverse-leave-active {
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  animation: reverse-out 0.5s ease-out forwards;
+}
+@keyframes reverse-out {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(90deg);
+  }
+}
+@keyframes reverse-in {
+  0% {
+    /* transform: rotateY(90deg); */
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-50px);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 </style>

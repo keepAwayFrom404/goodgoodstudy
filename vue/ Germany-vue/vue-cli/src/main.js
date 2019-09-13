@@ -13,6 +13,10 @@ Vue.directive('myon', {
     }
   }
 });
+Vue.filter('showStrLength', value => {
+  return value + ' ' + `(${value.length})`;
+});
+Vue.mixin({});
 new Vue({
   render: h => h(App)
 }).$mount('#app');
