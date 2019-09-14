@@ -12,6 +12,26 @@
     <title>vue-cli</title>
   </head>
   <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: 'AIzaSyCSX7Rshf1Xg-Jj8NXEjEX9v13VQX3b7SI',
+        authDomain: 'vuejs-http-785cf.firebaseapp.com',
+        databaseURL: 'https://vuejs-http-785cf.firebaseio.com',
+        projectId: 'vuejs-http-785cf',
+        storageBucket: 'vuejs-http-785cf.appspot.com',
+        messagingSenderId: '740940848647',
+        appId: '1:740940848647:web:3f5cb0e9222670782d14a2'
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
     <noscript>
       <strong>
         We're sorry but vue-cli doesn't work properly without JavaScript

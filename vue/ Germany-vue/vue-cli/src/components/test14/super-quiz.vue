@@ -1,5 +1,6 @@
 <template>
   <div>
+    新
     <div class="quiz">
       <div class="quiz-title">What is {{ firstNum }} + {{ secondNum }} ?</div>
       <div class="quiz-content">

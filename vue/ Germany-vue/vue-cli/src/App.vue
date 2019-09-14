@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <transition name="reverse" mode="out-in">
-      <component
-        :is="currentCom"
-        @newQuestion="currentCom = 'super-quiz'"
-        @resultPage="currentCom = 'result-quiz'"
-        class="test"
-      ></component>
-    </transition>
+    <h1>routing</h1>
+    <app-header></app-header>
+    <hr />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import SuperQuiz from './components/test14/super-quiz';
-import ResultQuiz from './components/test14/result-quiz';
+import Header from './components/par16/header';
 export default {
   data() {
     return {
-      currentCom: 'super-quiz'
+      user: {
+        username: '',
+        email: ''
+      }
     };
   },
   components: {
-    SuperQuiz,
-    ResultQuiz
+    'app-header': Header
+  },
+  methods: {
+    submit() {
+      this.$http
+        .post('https://vuejs-http.firebaseio.com/test.json', this.user)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>

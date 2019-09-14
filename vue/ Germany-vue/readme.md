@@ -107,3 +107,13 @@
 11. 动态组件也可以使用 transition 添加动画
 12. transition-group 会渲染成一个 dom 标签，默认为 span 可以通过 tag 属性修改，而 transition 不会渲染到 dom，
 13. transition-group 用法和 transition 一致，但是记得添加 key 值做区分，还有一个-move 类会被添加到需要改变位置的元素上
+
+# 第十五章 vue-router
+
+1. 路由默认 hash 模式，还有一个 history 模式可以在 VueRouter 实例里面设置
+2. 使用 router-link 相当于在链接处监听了隐式的鼠标点击事件，点击之后不会执行默认操作而只是加载正确的路由
+3. router-link 的 exact 属性要求链接完全匹配，默认模糊匹配
+4. /：后面可以添加动态的部分,在 params 里面，是用这种方式绑定的值在变化之后组件不会重新加载，
+5. $router是VueRouter实例，$route 是当前加载的路由
+6. 组件在加载路由之后创建，所以在任何时候都可以访问\$route 对象
+7. 监听\$route 对象可以拿都 vue-router 提供的 to 和 from 函数
