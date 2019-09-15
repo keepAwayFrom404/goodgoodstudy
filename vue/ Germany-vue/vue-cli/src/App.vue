@@ -1,14 +1,16 @@
 <template>
   <div id="app">
     <h1>routing</h1>
-    <app-header></app-header>
     <hr />
-    <router-view></router-view>
+    <router-view name="header-top"></router-view>
+    <transition name="reverse" mode="out-in">
+      <router-view></router-view>
+    </transition>
+    <router-view name="header-bottom"></router-view>
   </div>
 </template>
 
 <script>
-import Header from './components/par16/header';
 export default {
   data() {
     return {
@@ -17,9 +19,6 @@ export default {
         email: ''
       }
     };
-  },
-  components: {
-    'app-header': Header
   },
   methods: {
     submit() {

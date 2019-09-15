@@ -116,4 +116,19 @@
 4. /：后面可以添加动态的部分,在 params 里面，是用这种方式绑定的值在变化之后组件不会重新加载，
 5. $router是VueRouter实例，$route 是当前加载的路由
 6. 组件在加载路由之后创建，所以在任何时候都可以访问\$route 对象
-7. 监听\$route 对象可以拿都 vue-router 提供的 to 和 from 函数
+7. 监听\$route 对象可以拿到 vue-router 提供的 to 和 from 函数
+8. 子路由路径为/时，路径会直接加到域名后面，不加/则表示加到父路由路径后
+9. 给路由表配置 name 属性，在 router-link 的 to 中就可以绑定一个带 name 属性的对象进行跳转,name 加上 params 属性,也可以一起加上 query 属性
+10. 命名路由视图：给 router-view 设置 name 属性，当前路由出口显示什么直接在路由表中设置 components，并用 key 对应出口的 name 即可
+11. 路由加上#锚点可以跳到页面指定 id 位置
+12. 传递 hash fragment,在路由中加入 hash 参数，在这之前要到 vue-router 实例中设置 scrollBehavior，接收三个参数 to，from，savedPosition,需要返回一个包含 x，y 坐标的对象
+13. 路由守卫：三个可地方以检测用户进入路由；
+
+- 第一个 main.js：beforeEach：每次路由跳转之前执行，参数是一个函数，函数接收 to，from，next,next 不传东西为正常跳转，传 false 终止在当前页，传路径跳转到指定页
+- 第二个在 router 表中需要守卫的项加上 beforeEnter 函数，参数相同
+- 第三个在需要加载的路由组件里设置 beforeRouteEnter，参数相同，如果不传 next 该组件就不会加载，也就访问不到 vue 实例，可以在 next 函数中加回调
+
+14. beforeRouteLeave 是唯一检查用户离开的钩子
+15. import 的组件就会加载，实现懒加载要在每个当中加载
+
+# 第十六章 vuex
