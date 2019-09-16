@@ -132,3 +132,8 @@
 15. import 的组件就会加载，实现懒加载要在每个当中加载
 
 # 第十六章 vuex
+
+1. getters 是 vuex 的计算属性
+2. mutations 是用来跟踪 vuex 状态改变的，每次使用都要 commit,并且只能执行同步代码
+3. actions 异步的 mutations,使用 dispatch 触发
+4. 避免一个 store 过于臃肿，使用 modules

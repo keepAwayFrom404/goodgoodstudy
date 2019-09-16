@@ -5,6 +5,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
 import { routes } from './router';
+import { store } from './store/store';
 Vue.use(VueResource);
 
 export const serverBus = new Vue();
@@ -47,5 +48,6 @@ Vue.filter('showStrLength', value => {
 Vue.mixin({});
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app');

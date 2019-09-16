@@ -1,35 +1,35 @@
 <template>
   <div id="app">
-    <h1>routing</h1>
+    <count></count>
+    <other-count></other-count>
+    <result></result>
+    <other-result></other-result>
     <hr />
-    <router-view name="header-top"></router-view>
-    <transition name="reverse" mode="out-in">
-      <router-view></router-view>
-    </transition>
-    <router-view name="header-bottom"></router-view>
+    <input type="text" v-model="value" />
+    <p>{{ value }}</p>
   </div>
 </template>
 
 <script>
+import Result from './components/vuex/result';
+import Count from './components/vuex/count';
+import OtherCount from './components/vuex/other-count';
+import OtherResult from './components/vuex/other-result';
 export default {
-  data() {
-    return {
-      user: {
-        username: '',
-        email: ''
-      }
-    };
+  components: {
+    Result,
+    Count,
+    OtherResult,
+    OtherCount
   },
-  methods: {
-    submit() {
-      this.$http
-        .post('https://vuejs-http.firebaseio.com/test.json', this.user)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+  computed: {
+    value: {
+      get() {
+        return this.$store.getters.value;
+      },
+      set(value) {
+        this.$store.dispatch('updateValue', value);
+      }
     }
   }
 };
