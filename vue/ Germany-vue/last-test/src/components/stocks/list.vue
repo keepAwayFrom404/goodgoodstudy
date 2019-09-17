@@ -14,11 +14,12 @@ export default {
   },
   computed: {
     ...mapState(['funds']),
-    portfolioList() {
-      return this.$store.state.portfolio.portfolioList;
-    },
+    // 股票列表
     stockList() {
       return this.$store.state.stocks.stockList;
+    },
+    portfolioList() {
+      return this.$store.state.portfolio.portfolioList;
     },
   },
   methods: {

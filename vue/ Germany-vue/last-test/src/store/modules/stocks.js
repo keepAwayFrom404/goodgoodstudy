@@ -25,7 +25,7 @@ const state = {
 const mutations = {
   initStockPrice: state => {
     state.stockList.forEach(item => {
-      const randomNum = Math.floor(Math.random() * 100 + 1);
+      const randomNum = Math.round(item.price * (1 + Math.random() - 0.5));
       item.price = randomNum;
     });
   },

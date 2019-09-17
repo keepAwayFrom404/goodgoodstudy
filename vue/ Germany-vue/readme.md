@@ -137,3 +137,8 @@
 2. mutations 是用来跟踪 vuex 状态改变的，每次使用都要 commit,并且只能执行同步代码
 3. actions 异步的 mutations,使用 dispatch 触发
 4. 避免一个 store 过于臃肿，使用 modules
+5. 没带命名空间的 store 可以在直接 commit，对于其它模块的 state，getters，actions，mutations 可以通过这几个属性名直接调用
+
+# 第二十二章 前端鉴权
+
+1.
