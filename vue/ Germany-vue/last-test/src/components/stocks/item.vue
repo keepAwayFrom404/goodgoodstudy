@@ -6,7 +6,7 @@
     </div>
     <div class="content">
       <el-input v-model="item.buyNum" placeholder="Quantity"></el-input>
-      <el-button type="success" @click="buyStock">Buy</el-button>
+      <el-button type="success" @click="buyStock" :disabled="item.buyNum <= 0">Buy</el-button>
     </div>
   </div>
 </template>
