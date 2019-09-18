@@ -1,9 +1,11 @@
+let anyValue: any = '123';
+console.log(anyValue.myName);
+console.log(anyValue.myName.firstName);
 interface Person {
-  firstName: string;
-  lastName: string;
+  name: string;
+  age: number;
 }
-function greeter(person: Person) {
-  return `hello ${person.firstName} ${person.lastName}`;
-}
-let user = { firstName: 'lee', lastName: 'jiahua' };
-document.body.innerHTML = greeter(user);
+const tom: Person = {
+  name: 'tom',
+  age: 1
+};
