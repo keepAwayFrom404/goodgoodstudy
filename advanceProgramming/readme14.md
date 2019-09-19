@@ -118,3 +118,96 @@
 ## 14.6 小结
 
 # 第十五章 使用 canvas 绘图
+
+## 15.1 基本用法
+
+1. 使用 toDataURL 方法，可以导出在 canvas 上绘制的图像，接受一个参数，即图像的 MIME 类型格式（如：image/png）
+
+## 15.2 2D 上下文
+
+（1）2D 上下文的坐标开始于 canvas 的左上角，，默认情况下 width 和 height 表示水平和垂直方向的可用像素数目
+
+1. 填充和描边
+   （1）填充指用指定的样式（颜色、渐变或者图像）填充图形
+   （2）描边是在图形的边缘划线
+   （3）结果去取决于两个属性：fillStyle、strokeStyle，属性的值可以是字符串、渐变对象或者模式对象，默认值都是‘#000000’，可以为它们指定任何格式的颜色值
+2. 绘制矩形
+   （1）矩形是唯一一种可以直接在 2D 上下文中绘制的形状，包括 fillRect、strokeRect 和 clearRect 方法，都接受 4 个参数：x 坐标、y 坐标、宽度和高度
+   （2）描边线条宽度有 linewidth 属性控制，lineCap 控制线条末端的形状（平头 butt、圆头 round、方头 square）；lineJoin 控制相交处（圆交 round、斜交 bevel、斜接 miter）
+   （3）clearRect 用于清除画布上的矩形，可以让画布的某一块矩形区域透明，通过绘制形状再清除指定区域可以绘制有意思的效果
+3. 绘制路径
+   （1）通过路径可以绘制复杂的形状和线条，首先必须调用 beginPath 表示开始绘制新路径，然后调用以下方法来实际绘制：
+
+- arc(x,y,radius,startAngle,endAngle,counterclockwise)：以（x，y）为圆心绘制一条弧线，其实结束角度用弧度表示，最后一个参数表示顺序值为 false 表示顺时针方向计算
+- arcTo(x1,y1,x2,y2,radius)：从上一点开始绘制一条弧线到（x2，y2）截止，以指定的半径穿过（x1，y1）
+- bezierCurveTo（c1x，c1y，c2x，c2y，x，y）：从上一点开始绘制一条曲线到（x，y）为止，并且以（c1x，c1y）（c2x，c2y）为控制点
+- lineTo(x,y)
+- moveTO(x,y)
+- quadraticCurveTo(cx,cy,x,y): 从上一点开始绘制一条二次曲线，到(x,y)结束，（cx，cy）为控制点
+- rect(x,y.width,height): 从（x，y）开始绘制一个矩形，绘制的是矩形路径而不是前面的独立形状
+
+  （2）创建完路径之后有几种情况：
+
+- closePath：绘制一条连接到起点的线条
+- 可以使用 fill 填充它
+- 还可以调用 stroke 对路径描边
+- 还可以使用 clip 方法创建一个剪切区域
+  （3）路径使用很频繁 isPointInPath 接收一个坐标，路径被关闭之前确定画布的某点是否在路径上
+
+4. 绘制文本
+   （1）fillText、strokeText 方法，都接收 4 个参数：要绘制的文本字符串，x，y 坐标、可选的最大像素宽度
+   （2）由于绘制文本比较复杂，使用 measureText 确定文本大小，接收要绘制的文本，返回一个 TextMetrics 对象，对象只有一个 width 属性
+5. 变换
+   （1）可以通过以下方法来变换矩阵：
+
+- rotate(angle)：围绕原点旋转
+- scale(scaleX,scaleY)：分别在 x，y 方向缩放，默认值都是 1
+- translate(x,y): 将原点移动到（x，y），变换之后的原点会改变
+- transform(m1_1,m1_2,m2_1,m2_2,dx,dy): 直接修改变换矩阵，乘以[[m1_1,m1_2,dx],[m2_1,m2_2,dy],[0,0,1]]
+- setTransform(m1_1,m1_2,m2_1,m2_2,dx,dy): 将变换矩阵重置为默认状态，然后调用 transform
+  （2）save 方法可以保存某组属性与变换的组合，restore 方法使用保存的组合，可以存储多个，只会保存绘图上下文的绘制和变换，不会保存绘图上下文的内容
+
+6. 绘制图像
+   （1）使用 drawImage 绘制图像，可以传入 img 标签加位置坐标
+   （2）多加两个参数设置图像的宽度和高度
+   （3）可以把图像的某个区域绘制到上下文，九个参数：要绘制的图像、源图像的 x、y、源图像的 width、height、目标图像的 x、y、目标图像的宽度、高度
+   （4）第一个参数除了传递 img 还能传递 canvas
+   （5）图像的操作结果可以用 toDataURL（是 canvas 的方法而不是 context 的）获得，但是必须同源，不然会报错
+7. 阴影
+   （1）根据以下属性自动为形状或者路径绘制阴影：
+
+- shadowColor：阴影颜色，默认黑色
+- shadowOffsetX：x 轴偏移量
+- shadowOffsetY：y 轴偏移量
+- shadowBlur：阴影模糊的像素数，默认 0
+  （2）以上属性都可以通过 context 修改，只要在绘制之前设置就行
+
+8. 渐变
+   （1）渐变由 canvasGradient 实例表示，创建一个新的线性渐变可以调用 createLinearGradient 方法，接收四个参数：起点 x、y、终点 x、y
+   （2）创建完会返回 canvasGradient 对象的实例，接着使用 addColorStop 方法指定色标，两个参数：色标、颜色值，色标 0-1
+   （3）将定义好的渐变赋值给 fillstyle 即可为下面的元素设置渐变（渐变只存在于定义的矩形区域内）
+   （4）径向渐变使用 createRadialGradient，六个参数：起点圆的圆心 x、y、半径、终点圆的 x、y、半径
+9. 模式
+   （1）模式其实就是重复的图像，可以用来填充和描边图形，创建新模式调用 createPattren，传入两个参数：一个 html 的 img 元素，一个如何重复的字符串
+   （2）第一个参数也可以是一个 video 或者 canvas 对象
+   （3）模式与渐变都是从 0，0 开始的，将填充的颜色改成模式对象，只表示在某个特定的区域显示重复的图像
+10. 使用图像数据
+    （1）2D 上下文的优势就是可以通过 getImageData 获取原始图像数据，接收四个参数：要获得数据画面区域的 x、y 坐标及该区域的像素宽度和高度
+    （2）返回的是 imageData 实例，有 width、height、data 三个属性，data 属性是一个数组保存着图像每一个像素的数据，每个像素用 4 个元素保存：分别是 rgba
+    （3）putImageData 可以修改图像的 imageData 实例
+11. 合成
+    （1）还有两个会用到 2D 上下文所有绘制操作的属性 globalAlpha 和 globalCompositionOperation
+    （2）globalAlpha 指定所有绘制的透明度 0-1
+    （3）globalAlpha 和 globalCompositionOperation: 表示后绘制的图形怎么与先绘制的图形结合，值是字符串
+
+- source-over（默认值）：后在上方
+- source-in：重叠部分可见，其他部分完全透明（异常）
+- source-out: 不重叠部分可见，先绘制的图形完全透明
+- source-atop：重叠部分可见，先绘制图像不受影响（异常）
+- destination-over：后绘制在下方，之前透明像素下的部分可见
+- destination-in：后绘制在下方，不重叠的部分完全透明（异常）
+- destination-out：后绘制的图形擦除先绘制的图形的重叠部分（异常）
+- destination-atop：后绘制在下方，两者不重叠的部分先绘制的会变透明
+- lighter：后绘制的图形与先绘制的图形重叠部分相加
+- copy：后完全替代先图像与之重叠的部分（异常）
+- xor：先后重叠部分执行异或操作
