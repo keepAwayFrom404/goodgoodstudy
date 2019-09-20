@@ -211,3 +211,19 @@
 - lighter：后绘制的图形与先绘制的图形重叠部分相加
 - copy：后完全替代先图像与之重叠的部分（异常）
 - xor：先后重叠部分执行异或操作
+
+## 15.3 WebGL
+
+1. 类型化数组
+   （1）核心是 ArrayBuffer 的类型，它能做的就是为将来使用而分配一定数量的字节，可通过 byteLength 读取包含的字节数
+   （2）类型化数组是 WebGL 项目执行各种操作的重要基础
+2. WebGL 上下文
+   （1）可以给 getContext 传第二个参数，这个参数是一个对象，包含下列属性：
+   - alpha：为上下文创建一个 Alpha 通道缓冲区，默认为 true
+   - depth：使用 16 位深缓冲区，默认 true
+   - stencil：使用 8 位模板缓冲区默认 false
+   - antialias：使用默认机制执行抗锯齿默认 true
+   - premultipliedAlpha：绘图缓冲区有预乘 Alpha 值，默认 true
+   - preserveDrawingBuffer：表示绘图完成后保存到绘图缓冲区，默认 false，建议确实有必要再开启，可能影响性能
+     （2）常量：webgl 中有很多操作常量
+     （3）方法命名：后缀显示参数个数、参数类型、数组
