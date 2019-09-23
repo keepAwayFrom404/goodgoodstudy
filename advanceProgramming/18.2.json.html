@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const book = {
+        title: 'book',
+        year: '2011',
+        time: new Date(2011, 11, 1)
+      };
+      const str = JSON.stringify(book);
+      console.log(str);
+      const parse = JSON.parse(str, (key, value) => {
+        if (key === 'time') {
+          return new Date(value);
+        } else {
+          return value;
+        }
+      });
+      console.log(parse);
+    </script>
+  </body>
+</html>
