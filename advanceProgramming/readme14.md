@@ -253,4 +253,57 @@
 
 3. dataTransfer 对象
    （1）他是事件对象的一个属性，用于从被拖放元素向目标元素传递字符串格式的数据
-   （2）主要有 setData 和 getData 两个方法：第一个参数为保存数据类型，取值为‘text’或者‘setData’
+   （2）主要有 setData 和 getData 两个方法：第一个参数为保存数据类型，取值为‘text’或者‘URL’
+   （3）把短数据类型放在前面， 因为旧版本不支持可能报错
+4. dropEffet 与 effectAllowed，都是 dataTransfer 的属性
+   （1）dropEffet：可以知道被拖放的元素支持哪些放置行为
+
+- none：不能放置，除文本框之外的所有元素默认值
+- move：移动到目标
+- copy：复制到目标
+- link：放置目标会打开拖放的元素（拖放的元素必须是一个链接，有 URL）
+  （2）dropEffet 只有搭配 effectAllowed 才能使用，effectAllowed 表示允许拖放元素的哪种 dropEffet
+- uninitialized：没有给拖放元素任何的放置行为
+- none：不能有任何行为
+- copy：只允许 copy 的 dropEffet
+- link：只允许 link 的 dropEffet
+- move：只允许 move 的 dropEffet
+- copylink：只允许 copy 和 link 的 dropEffet
+- copymove：只允许 copy 和 move 的 dropEffet
+- movelink：只允许 move 和 link 的 dropEffet
+- all：允许任意的 dropEffet
+  （4）必须在 ondragstrat 事件中设置 effectAllowed 属性
+
+5. 可拖动
+   （1）给元素设置 draggable 属性
+6. 其他成员
+   （1）h5 规定 dataTransfer 对象还需要包含以下方法和属性：
+
+- addElement(element)：为拖动操作添加一个元素
+- clearData(format)：清除以特定格式保存的数据
+- setDragImage(element,x,y)：指定一幅图像，当拖放发生显示在光标下方，三个参数为要显示的 html 元素和在图像中的坐标，html 元素可以是图像也可以是其它元素
+- types：当前保存的数据类型，是一个类数组集合，保存 text 这样的字符串形式数据
+
+## 16.3 媒体元素
+
+（1）poster 可以在 video 加载视频期间显示一幅图像，controls 显示 UI 控件
+（2）并不是所有的浏览器都支持媒体格式，可以使用 source 标签包在媒体标签中指定多个格式文件
+
+1.  audio 和 video 属性
+    （1）太多了，用到再说
+2.  事件也不少
+3.  自定义媒体播放器
+    （1）使用媒体元素的 play 和 pause 方法
+4.  检测编解码器的支持情况
+    （1）并不是所有的浏览器都支持 video 和 audio 的所有编解码器，所以需要提供多个媒体资源
+    （2）canPlayType 可以检测是否支持某个格式，接收一种格式/编解码器字符串，返回 probably、maybe、空字符串
+5.  audio 类型
+    （1）它有一个原生的 js 构造函数 Audio）可以在任何时候播放音频
+
+## 16.4 历史状态管理
+
+（1）history 的 pushState 方法在不加载新页面的情况下改变浏览器的 URL，接收三个参数：状态对象、新状态的标题、可选的相对 URL
+（2）pushState 会创建新的历史状态，，点击前进后退会触发 popState 事件，该事件的事件对象有一个 state 属性，包含 pushState 的第一个参数
+（3）更新当前状态使用 replaceState，使用这个方法不会再历史状态栈中创建新的状态，参数与 pushState 相同，传递的状态对象参数不能包含 dom 元素
+
+## 16.5 小结
