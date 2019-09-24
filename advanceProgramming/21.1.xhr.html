@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const xhr = createXHR();
+      console.log(xhr);
+
+      function createXHR() {
+        if (typeof XMLHttpRequest != 'undefined') {
+          return new XMLHttpRequest();
+        } else if (typeof ActiveXObject != 'undefined') {
+          if (typeof arguments.callee.activeXString != 'string') {
+            const versions = [
+              'MSXML2.XML0; Http6.0',
+              'MSXML2.XMLHttp3.0',
+              'MSXML2.XMLHttp'
+            ];
+            for (let i = 0; i < versions.length; i++) {
+              try {
+                new ActiveXObject(versions[i]);
+                arguments.callee.activeXString = versions[i];
+                break;
+              } catch (ex) {
+                break;
+              }
+            }
+          }
+          return new ActiveXObject(arguments.callee.activeXString);
+        } else {
+          throw new Error('no xhr object available');
+        }
+      }
+    </script>
+  </body>
+</html>
