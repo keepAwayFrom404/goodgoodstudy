@@ -8,8 +8,25 @@
   </head>
   <body>
     <script>
+      /** @type {XMLHttpRequest} */
       const xhr = createXHR();
-      console.log(xhr);
+      // 会导致系统卡死
+      // xhr.onreadystatechange = function() {
+      //   console.log(1111);
+      //   if (xhr.readyState == 4) {
+      //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+      //       console.log(xhr.responseText, 1234);
+      //     } else {
+      //       console.log(xhr.status);
+      //     }
+      //   }
+      // };
+      xhr.open('get', './1.mp4', false);
+      xhr.setRequestHeader('liHeader', 777);
+      xhr.send(null);
+      const header = xhr.getResponseHeader('liHeader');
+      const all = xhr.getAllResponseHeaders();
+      console.log(header, all);
 
       function createXHR() {
         if (typeof XMLHttpRequest != 'undefined') {
