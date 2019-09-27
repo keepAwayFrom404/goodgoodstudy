@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="mediaolayer">
+      <div class="video">
+        <video
+          id="player"
+          poster="../1.jpeg"
+          width="300"
+          height="200"
+          src="1.mp4"
+        >
+          Video player not available
+        </video>
+      </div>
+      <div class="controls">
+        <input type="button" id="video-btn" value="Play" />
+        <span id="curtime">0</span>
+        /
+        <span id="duration">0</span>
+      </div>
+    </div>
+    <script>
+      window.onload = function() {
+        const player = document.querySelector('#player'),
+          btn = document.querySelector('#video-btn'),
+          curtime = document.querySelector('#curtime');
+        duration = document.querySelector('#duration');
+        duration.innerHTML = Math.floor(player.duration) || 0;
+        btn.addEventListener('click', () => {
+          if (player.paused) {
+            player.play();
+            btn.value = 'Pause';
+          } else {
+            player.pause();
+            btn.value = 'Play';
+          }
+        });
+        setInterval(() => {
+          curtime.innerHTML = Math.floor(player.currentTime) || 0;
+        }, 250);
+      };
+    </script>
+  </body>
+</html>

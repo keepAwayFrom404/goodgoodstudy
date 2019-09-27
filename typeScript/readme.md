@@ -32,3 +32,6 @@
    （2）ts 使用函数表达式，let mySun:(x:number,y:number) => number = function(x:number,y:number):number{return x + y}
    （3）也可以使用接口定义函数类型
    （4）可选参数后面不能再有必选参数，而设置默认值的参数相当于可选参数，但是不受后面不能有必选参数的限制
+8. 面向对象特性
+   （1）实现接口（implements）的类必须实现接口定义的方法
+   （2）一个文件就是一个模块，只需要使用导入导出作为支撑
