@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="behavior:url(#default#userData)" id="dataStore"></div>
+    <button onclick="storage()">storage</button>
+    <script src="./CookieUtil.js"></script>
+    <script src="./EventUtil.js"></script>
+    <script>
+      CookieUtil.set('lee', 'lijiahua');
+      CookieUtil.set('book', 'Professional JavaScript');
+      CookieUtil.unset('lee');
+
+      //   var dataStore = document.getElementById('dataStore');
+      //   dataStore.setAttribute('name', 'Nicholas');
+      //   dataStore.setAttribute('book', 'Professional JavaScript');
+      //   dataStore.save('BookInfo');
+      function storage() {
+        console.log('done');
+        localStorage.setItem('l', 'lijiahua');
+      }
+      EventUtil.addHandler(document, 'storage', function(event) {
+        alert('Storage changed for ' + event.domain);
+      });
+    </script>
+  </body>
+</html>

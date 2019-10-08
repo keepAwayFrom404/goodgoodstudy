@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="my-btn" style="margin-left: 0">Button</button>
+    <div id="message" style="border: 1px solid #000000">
+      i am message
+    </div>
+    <script>
+      const btn = document.querySelector('#my-btn');
+      const msg = document.getElementById('message');
+      function resizeMsg() {
+        console.log('resize done');
+        msg.style.height = msg.offsetWidth + 'px';
+      }
+      function throttle(method, context) {
+        clearTimeout(method.tId);
+        method.tId = setTimeout(() => {
+          method.call(context);
+        }, 100);
+      }
+      window.onresize = function() {
+        throttle(resizeMsg);
+      };
+      setTimeout(() => {
+        left = parseInt(btn.style.marginLeft) + 5;
+        btn.style.marginLeft = left + 'px';
+        if (left < 200) {
+          setTimeout(arguments.callee, 50);
+        }
+      }, 50);
+    </script>
+  </body>
+</html>
