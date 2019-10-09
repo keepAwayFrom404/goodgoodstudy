@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="output"></div>
+    <script>
+      function handleVisibilityChange() {
+        var output = document.getElementById('output'),
+          msg;
+        if (document.hidden || document.msHidden || document.webkitHidden) {
+          msg = 'Page is now hidden. ' + new Date() + '<br>';
+        } else {
+          msg = 'Page is now visible. ' + new Date() + '<br>';
+        }
+        output.innerHTML += msg;
+      }
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      navigator.geolocation.watchPosition(
+        position => {
+          console.log(position, 111);
+        },
+        err => {
+          console.log('refuse resquest', err);
+        }
+      );
+    </script>
+  </body>
+</html>
