@@ -9,17 +9,20 @@
   <body>
     <div id="app">
       <h1>{{ name }}</h1>
-      <h2>{{ age }}</h2>
+      <h2>{{ title }}</h2>
     </div>
     <script src="./Observer.js"></script>
+    <script src="./Watcher.js"></script>
     <script src="./Compile.js"></script>
+    <script src="./index.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script> -->
     <script>
-      const ele = document.querySelector('#name');
+      const ele = document.querySelector('#app');
       const selfVue = new SelfVue({
         el: '#app',
         data: {
-          name: 'lee',
-          age: 23
+          title: 'hello world',
+          name: '111'
         }
       });
       setTimeout(() => {

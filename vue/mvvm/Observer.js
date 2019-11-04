@@ -34,61 +34,9 @@ Dep.prototype = {
   }
 };
 
-function Watcher(vm, exp, cb) {
-  this.cb = cb;
-  this.exp = exp;
-  this.vm = vm;
-  this.value = this.get();
-}
-Watcher.prototype = {
-  update: function() {
-    this.run();
-  },
-  run: function() {
-    let value = this.vm.data[this.exp];
-    let oldVal = this.value;
-    if (value !== oldVal) {
-      this.value = value;
-      this.cb.call(this.vm, value, oldVal);
-    }
-  },
-  get: function() {
-    Dep.target = this;
-    let value = this.vm.data[this.exp];
-    Dep.target = null;
-    return value;
-  }
-};
-
 function observe(data) {
   if (!data || typeof data !== 'object') return;
   Object.keys(data).forEach(key => {
     defineReactive(data, key, data[key]);
   });
 }
-
-function SelfVue(options) {
-  this.vm = this;
-  this.data = options;
-  Object.keys(this.data).forEach(key => {
-    this.proxyKeys(key);
-  });
-  observe(this.data);
-  new Compile(options, this.vm);
-  return this;
-}
-
-SelfVue.prototype = {
-  proxyKeys: function(key) {
-    Object.defineProperty(this, key, {
-      enumerable: false,
-      configurable: true,
-      get: function proxyGetter() {
-        return this.data[key];
-      },
-      set: function proxySetter(newVal) {
-        this.data[key] = newVal;
-      }
-    });
-  }
-};
