@@ -10,6 +10,9 @@
     <div id="app">
       <h1>{{ name }}</h1>
       <h2>{{ title }}</h2>
+      <div class="test">
+        <h3>{{ name }}</h3>
+      </div>
     </div>
     <script src="./Observer.js"></script>
     <script src="./Watcher.js"></script>
@@ -28,6 +31,7 @@
       setTimeout(() => {
         console.log('name change');
         selfVue.name = 'lee';
+        selfVue.title = '111';
       }, 2000);
     </script>
   </body>

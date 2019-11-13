@@ -1,8 +1,8 @@
 function Watcher(vm, exp, cb) {
-  this.cb = cb;
-  this.exp = exp;
-  this.vm = vm;
-  this.value = this.get();
+  this.cb = cb; // callback
+  this.exp = exp; // key
+  this.vm = vm; // options
+  this.value = this.get(); // value
 }
 Watcher.prototype = {
   update: function() {
@@ -18,7 +18,7 @@ Watcher.prototype = {
   },
   get: function() {
     Dep.target = this;
-    let value = this.vm.data[this.exp];
+    let value = this.vm.data[this.exp]; // 访问触发push
     Dep.target = null;
     return value;
   }

@@ -15,11 +15,18 @@ function defineReactive(data, key, val) {
       val = newValue;
       console.log(`属性${key}已经被监听，现在的值为${newValue.toString()}`);
       dep.notify();
+      console.log(dep);
     }
   });
 }
-Dep.target = null;
 
+function observe(data) {
+  if (!data || typeof data !== 'object') return;
+  Object.keys(data).forEach(key => {
+    defineReactive(data, key, data[key]);
+  });
+}
+Dep.target = null;
 function Dep() {
   this.subs = [];
 }
@@ -33,10 +40,3 @@ Dep.prototype = {
     });
   }
 };
-
-function observe(data) {
-  if (!data || typeof data !== 'object') return;
-  Object.keys(data).forEach(key => {
-    defineReactive(data, key, data[key]);
-  });
-}
