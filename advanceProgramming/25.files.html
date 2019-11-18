@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="fileItem" type="file" />
+    <div id="output"></div>
+    <div id="progress"></div>
+    <script>
+      function blobSlice(blob, startByte, length) {
+        if (blob.slice) {
+          return blob.slice(startByte, length);
+        } else if (blob.webkitSlice) {
+          return blob.webkitSlice(startByte, length);
+        } else if (blob.mozSlice) {
+          return blob.mozSlice(startByte, length);
+        } else {
+          return null;
+        }
+      }
+      const file = document.querySelector('#fileItem');
+      file.addEventListener('change', e => {
+        let info = '',
+          output = document.querySelector('#output'),
+          progress = document.querySelector('#progress'),
+          files = e.target.files,
+          reader = new FileReader(),
+          blob = blobSlice(files[0], 0, 320);
+
+        if (blob) {
+          reader.readAsText(blob);
+          reader.onerror = function() {
+            output.innerHTML = 'cound not read file';
+          };
+          reader.onload = function() {
+            output.innerHTML = reader.result;
+          };
+        } else {
+          alert('your brower do not support slice()');
+        }
+      });
+    </script>
+  </body>
+</html>

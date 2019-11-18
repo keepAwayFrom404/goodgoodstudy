@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ name }}</h1>
+      <h2>{{ title }}</h2>
+      <div class="test">
+        <h3>{{ name }}</h3>
+      </div>
+    </div>
+    <script src="./Observer.js"></script>
+    <script src="./Watcher.js"></script>
+    <script src="./Compile.js"></script>
+    <script src="./index.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script> -->
+    <script>
+      const ele = document.querySelector('#app');
+      const selfVue = new SelfVue({
+        el: '#app',
+        data: {
+          title: 'hello world',
+          name: '111'
+        }
+      });
+      setTimeout(() => {
+        console.log('name change');
+        selfVue.name = 'lee';
+        selfVue.title = '111';
+      }, 2000);
+    </script>
+  </body>
+</html>

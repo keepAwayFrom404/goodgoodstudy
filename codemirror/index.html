@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.bootcss.com/codemirror/5.48.4/theme/seti.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.js"></script>
+    <script src="https://cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea id="code"></textarea>
+    <script>
+      //   console.log(CodeMirror.fromTextArea);
+      const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+        mode: 'javascript',
+        lineNumbers: true,
+        theme: 'dracula'
+      });
+    </script>
+  </body>
+</html>

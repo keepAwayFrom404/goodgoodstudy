@@ -1,0 +1,22 @@
+{
+  "name": "mocha-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.2.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "mz": "^2.7.0"
+  }
+}

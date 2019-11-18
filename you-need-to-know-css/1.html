@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      input:not(:focus) + .popTips {
+        transform: scale(0);
+        transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+      }
+
+      input:focus + .popTips {
+        transform: scale(1);
+        transition: transform 0.4s cubic-bezier(0.29, 0.15, 0.5, 1.46);
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" class="popTips" /><input class="popTips" type="text" />
+  </body>
+</html>

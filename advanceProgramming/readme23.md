@@ -116,3 +116,16 @@
    （3）第三个选项对象用于设置信息的类型：可以设置的选项有三个 enableHighAccuracy（布尔值，表示尽可能使用最准确的信息）；timeout（等待位置信息的最长时间）；maximumAge（上一次获得的坐标信息的有效时间，时间到则重新获取）
 2. watchPosition 用于跟踪用户位置参数与上面完全相同，与定时调用 getCurrentPosition 效果相同
 3. clearWatch 取消跟踪
+
+## 25.4 File API
+
+1. file 类型读取本地文件的 files 属性包含了上传文件的列表，可以获取一些文件相关的信息
+2. FileReader 异步读取文件，与 XMLHttpRequest 类似，只不过它读的不是服务器请求
+
+## 25.5 Web Timing
+
+1. 给出页面加载和渲染过程中的很多信息，用于性能优化
+
+## 25.6 Web Workers
+
+1. 可以运行异步 js，防止阻塞页面
