@@ -1,62 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://houtai.baidu.com/v2/csssdk" />
-    <title>Document</title>
-    <style>
-      html,
-      body,
-      .app-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root" class="app-wrapper"></div>
-    <script src="https://houtai.baidu.com/v2/jssdk"></script>
-    <script type="text/javascript">
-      (function() {
-        var amis = amisRequire('amis/embed');
-        amis.embed('#root', {
-          type: 'page',
-          body: {
-            type: 'form',
-            title: '我是表单的title',
-            controls: [
-              {
-                type: 'email',
-                name: 'email',
-                placeholder: '请输入邮箱地址',
-                label: '邮箱',
-                required: true
-              },
-              {
-                type: 'password',
-                name: 'password',
-                label: '密码',
-                placeholder: '输入密码'
-              },
-              {
-                type: 'checkbox',
-                name: 'rememberMe',
-                label: '记住登录'
-              },
-              {
-                type: 'submit',
-                label: '登录',
-                level: 'success'
-              }
-            ]
-          }
-        });
-      })();
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://houtai.baidu.com/v2/csssdk" />
+  <title>Document</title>
+  <style>
+    html,
+    body,
+    .app-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root" class="app-wrapper"></div>
+  <script src="https://houtai.baidu.com/v2/jssdk"></script>
+  <script type="text/javascript">
+    (function () {
+      var amis = amisRequire('amis/embed');
+      amis.embed('#root', {
+        type: 'page',
+        body: {
+          type: 'form',
+          title: '我是表单的title',
+          controls: [{
+              type: 'email',
+              name: 'email',
+              placeholder: '请输入邮箱地址',
+              label: '邮箱',
+              required: true
+            },
+            {
+              type: 'password',
+              name: 'password',
+              label: '密码',
+              placeholder: '输入密码'
+            },
+            {
+              type: 'checkbox',
+              name: 'rememberMe',
+              label: '记住登录'
+            },
+            {
+              type: 'submit',
+              label: '登录',
+              level: 'success'
+            }
+          ]
+        }
+      });
+    })();
+  </script>
+</body>
+
 </html>
