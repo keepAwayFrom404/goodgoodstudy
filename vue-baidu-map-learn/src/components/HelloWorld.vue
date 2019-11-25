@@ -20,10 +20,15 @@
         :key="index"
       ></bm-polyline>
     </baidu-map>
+    <img :src="imgUrl" alt="" style="width:200px;height:200px" />
+    <canvas id="canvas" width="200" height="200"></canvas>
+    <button @click="shot">button</button>
   </div>
 </template>
 
 <script>
+// import html2canvas from "html2canvas";
+import rasterizeHTML from "rasterizehtml";
 export default {
   name: "HelloWorld",
   props: {
@@ -34,10 +39,54 @@ export default {
       polyline: {
         editing: false,
         paths: []
-      }
+      },
+      imgUrl: ""
     };
   },
   methods: {
+    shot() {
+      // html2canvas(document.body,{
+      //   onclone:
+      // })
+      //   .then(res => {
+      //     this.imgUrl = res.toDataURL();
+      //     console.log(res, 12121);
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+      const cnavas = document.getElementById("canvas");
+      rasterizeHTML.drawURL("http://localhost:8080/", cnavas);
+
+      // const setInlineStyles = targetEle => {
+      //   const transformProperties = [
+      //     "fill",
+      //     "color",
+      //     // 'font-size',
+      //     // 'stroke',
+      //     // 'font',
+      //     "width",
+      //     "height"
+      //   ];
+      //   const resetStyles = node => {
+      //     if (!node.style) {
+      //       return;
+      //     }
+      //     let styles = getComputedStyle(node);
+      //     for (let transformProperty of transformProperties) {
+      //       node.style[transformProperty] = styles[transformProperty];
+      //     }
+      //     // node.style.overflow = 'visible'
+      //     for (let child of Array.from(node.childNodes)) {
+      //       resetStyles(child);
+      //     }
+      //   };
+      //   let svgElems = Array.from(targetEle.getElementsByTagName("svg"));
+      //   for (let svgElem of svgElems) {
+      //     resetStyles(svgElem);
+      //   }
+      // };
+    },
     toggle(name) {
       this[name].editing = !this[name].editing;
     },
