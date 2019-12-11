@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .line-con {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+      .line {
+        width: 4px;
+        height: 125px;
+        background: #000;
+        transform-origin: top center;
+      }
+      .line1 {
+        animation: line1 2s ease-in-out infinite;
+        transform: rotate(-40deg);
+      }
+      .line2 {
+        animation: line2 2s ease-in-out infinite;
+        transform: rotate(40deg);
+      }
+      .inner-line {
+        position: absolute;
+        bottom: -100px;
+        left: 0;
+        width: 4px;
+        height: 100px;
+        background: #000;
+        transform-origin: top center;
+      }
+      .inner-line1 {
+        animation: line1-1 2s ease-in-out infinite;
+        /* transform: rotate(-10deg); */
+      }
+      .inner-line2 {
+        animation: line2-2 2s ease-in-out infinite;
+        /* transform: rotate(50deg); */
+      }
+      @keyframes line1 {
+        0% {
+          transform: rotate(-40deg);
+        }
+        50% {
+          transform: rotate(40deg);
+        }
+        100% {
+          transform: rotate(-40deg);
+        }
+      }
+      @keyframes line2 {
+        0% {
+          transform: rotate(40deg);
+        }
+        50% {
+          transform: rotate(-40deg);
+        }
+        100% {
+          transform: rotate(40deg);
+        }
+      }
+      @keyframes line1-1 {
+        0% {
+          transform: rotate(-5deg);
+        }
+        50% {
+          transform: rotate(80deg);
+        }
+        100% {
+          transform: rotate(-5deg);
+        }
+      }
+      @keyframes line2-2 {
+        0% {
+          transform: rotate(80deg);
+        }
+        50% {
+          transform: rotate(-5deg);
+        }
+        100% {
+          transform: rotate(80deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="line-con">
+      <div class="line line1">
+        <div class="inner-line inner-line1"></div>
+      </div>
+      <div class="line line2">
+        <div class="inner-line inner-line2"></div>
+      </div>
+    </div>
+  </body>
+</html>
