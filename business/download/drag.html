@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    #dragger {
+      width: 400px;
+      height: 400px;
+      border: 1px dotted pink;
+    }
+  </style>
+  <body>
+    <div id="dragger"></div>
+    <input type="file" id="input" onchange="handleFiles(this.files)" />
+    <div id="showPng"></div>
+    <script>
+      let dragger = document.getElementById("dragger");
+      const showPng = document.getElementById("showPng");
+      dragger.addEventListener("dragenter", dragenter, false);
+      dragger.addEventListener("dragover", dragover, false);
+      dragger.addEventListener("drop", drop, false);
+      function dragenter(e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+      function dragover(e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+      function drop(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        let dt = e.dataTransfer;
+        var files = dt.files;
+        handleFiles(files);
+        console.log(dt, "drop");
+      }
+      function handleFiles(files) {
+        const fileUrl = window.URL.createObjectURL(files[0]);
+        const img = document.createElement("img");
+        img.src = fileUrl;
+        showPng.appendChild(img);
+      }
+    </script>
+  </body>
+</html>

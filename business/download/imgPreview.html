@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    #dropbox {
+      width: 400px;
+      height: 400px;
+      border: 1px solid red;
+    }
+  </style>
+  <body>
+    <input id="input" type="file" onchange="handleFiles(this.files)" />
+    <div id="dropbox"></div>
+    <script>
+      let dropbox = document.getElementById("dropbox");
+      function handleFiles(files) {
+        for (let index = 0; index < files.length; index++) {
+          const file = files[index];
+          const imageType = /^image\//;
+          if (!imageType.test(file.type)) {
+            continue;
+          }
+          let img = document.createElement("img");
+          img.classList.add("obj");
+          img.file = file;
+          dropbox.appendChild(img);
+
+          let render = new FileReader();
+          render.onload = (function(aImg) {
+            return function(e) {
+              aImg.src = e.target.result;
+            };
+          })(img);
+          render.readAsDataURL(file);
+        }
+      }
+      // const file = document.querySelector("#input").files[0];
+      // console.log(file);
+      // let dropbox;
+
+      // dropbox = document.getElementById("dropbox");
+      // dropbox.addEventListener("dragenter", dragenter, false);
+      // dropbox.addEventListener("dragover", dragover, false);
+      // dropbox.addEventListener("drop", drop, false);
+      // function dragenter(e) {
+      //   e.stopPropagation();
+      //   e.preventDefault();
+      // }
+
+      // function dragover(e) {
+      //   e.stopPropagation();
+      //   e.preventDefault();
+      // }
+      // function drop(e) {
+      //   e.stopPropagation();
+      //   e.preventDefault();
+
+      //   var dt = e.dataTransfer;
+      //   var files = dt.files;
+
+      //   handleFiles(files);
+      // }
+    </script>
+  </body>
+</html>
