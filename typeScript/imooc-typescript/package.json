@@ -11,7 +11,7 @@
     "typescript",
     "client"
   ],
-  "author": "lijiahua <lijh@getui.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "cross-env": "^6.0.0",
