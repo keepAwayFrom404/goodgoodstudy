@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app" v-matomo="{a:1,b:2}">{{msg}}</div>
+  <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: 'hello world'
+        }
+      },
+      directives: {
+        matomo: {
+          inserted: function (el, binding) {
+
+            el.addEventListener('click', () => {
+              console.log('i am click' + binding.value.a)
+            })
+            console.log('111')
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
