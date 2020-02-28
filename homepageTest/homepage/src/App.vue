@@ -14,27 +14,27 @@
 </template>
 
 <script>
-import 'particles.js';
-import particlesOptions from './data.json';
+import "particles.js";
+import particlesOptions from "./data.json";
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
       swiperOption: {
-        direction: 'vertical',
+        direction: "vertical",
         slidesPerView: 1,
         mousewheel: true,
         speed: 1000,
         pagination: {
-          el: '.swiper-pagination',
+          el: ".swiper-pagination",
           clickable: true
         }
       }
     };
   },
   mounted() {
-    particlesJS('particles-js', particlesOptions);
+    particlesJS("particles-js", particlesOptions);
   },
   methods: {}
 };

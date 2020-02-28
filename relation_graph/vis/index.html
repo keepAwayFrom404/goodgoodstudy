@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #mynetwork {
+        width: 900px;
+        height: 900px;
+        border: 1px solid lightgray;
+      }
+      #loadingBar {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 902px;
+        height: 902px;
+        background-color: rgba(200, 200, 200, 0.8);
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        opacity: 1;
+      }
+      #wrapper {
+        position: relative;
+        width: 900px;
+        height: 900px;
+      }
+
+      #text {
+        position: absolute;
+        top: 8px;
+        left: 530px;
+        width: 30px;
+        height: 50px;
+        margin: auto auto auto auto;
+        font-size: 22px;
+        color: #000000;
+      }
+
+      div.outerBorder {
+        position: relative;
+        top: 400px;
+        width: 600px;
+        height: 44px;
+        margin: auto auto auto auto;
+        border: 8px solid rgba(0, 0, 0, 0.1);
+        background: rgb(252, 252, 252); /* Old browsers */
+        background: -moz-linear-gradient(
+          top,
+          rgba(252, 252, 252, 1) 0%,
+          rgba(237, 237, 237, 1) 100%
+        ); /* FF3.6+ */
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0%, rgba(252, 252, 252, 1)),
+          color-stop(100%, rgba(237, 237, 237, 1))
+        ); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(
+          top,
+          rgba(252, 252, 252, 1) 0%,
+          rgba(237, 237, 237, 1) 100%
+        ); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(
+          top,
+          rgba(252, 252, 252, 1) 0%,
+          rgba(237, 237, 237, 1) 100%
+        ); /* Opera 11.10+ */
+        background: -ms-linear-gradient(
+          top,
+          rgba(252, 252, 252, 1) 0%,
+          rgba(237, 237, 237, 1) 100%
+        ); /* IE10+ */
+        background: linear-gradient(
+          to bottom,
+          rgba(252, 252, 252, 1) 0%,
+          rgba(237, 237, 237, 1) 100%
+        ); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+        border-radius: 72px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      #border {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 500px;
+        height: 23px;
+        margin: auto auto auto auto;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+
+      #bar {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 20px;
+        height: 20px;
+        margin: auto auto auto auto;
+        border-radius: 11px;
+        border: 2px solid rgba(30, 30, 30, 0.05);
+        background: rgb(0, 173, 246); /* Old browsers */
+        box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      With the new stabilization events you can implement your own custom
+      loading bar for all those long loading times!
+    </p>
+
+    <div id="wrapper">
+      <div id="mynetwork"></div>
+    </div>
+
+    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+      function draw() {
+        // create some nodes
+        var nodes = [
+          { id: "imei_868854029652527", label: "imei_868854029652527" },
+          { id: "imsi_460008491954981", label: "imsi_460008491954981" },
+          { id: "imsi_460018327513148", label: "imsi_460018327513148" },
+          { id: "imei_864779033901400", label: "imei_864779033901400" },
+          { id: "imsi_460023799630110", label: "imsi_460023799630110" },
+          { id: "mac_2c5bb8b9ead9", label: "mac_2c5bb8b9ead9" },
+          { id: "imsi_460110299805465", label: "imsi_460110299805465" },
+          {
+            id: "imei_861078035871288",
+            label: "imei_861078035871288",
+            group: 0
+          },
+          { id: "imei_865685025143688", label: "imei_865685025143688" },
+          {
+            id: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            label: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc"
+          },
+          {
+            id: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            label: "pn_8c4f1accf11b0a76392a2d27c61c9758"
+          },
+          { id: "mac_1c77f6601bd7", label: "mac_1c77f6601bd7" },
+          { id: "imsi_460022794725450", label: "imsi_460022794725450" },
+          { id: "imsi_460079799772969", label: "imsi_460079799772969" },
+          {
+            id: "pn_6c894cdc1c5698a708b20da0c64a878d",
+            label: "pn_6c894cdc1c5698a708b20da0c64a878d"
+          },
+          {
+            id: "pn_7695aa7403e736602c7eed4a899e2555",
+            label: "pn_7695aa7403e736602c7eed4a899e2555"
+          }
+        ];
+
+        // create some edges
+        var edges = [
+          {
+            from: "imsi_460008491954981",
+            to: "imei_864779033901400",
+            weight: 3,
+            length: 1070,
+            id: "107-1"
+          },
+          {
+            from: "imsi_460022794725450",
+            to: "imei_861078035871288",
+            weight: 3,
+            length: 710,
+            id: "71-2"
+          },
+          {
+            from: "imsi_460079799772969",
+            to: "imei_861078035871288",
+            length: 5860,
+            id: "586-3"
+          },
+          {
+            from: "mac_2c5bb8b9ead9",
+            to: "imei_861078035871288",
+            length: 1160,
+            id: "116-4"
+          },
+          {
+            from: "mac_2c5bb8b9ead9",
+            to: "imei_864779033901400",
+            length: 4280,
+            id: "428-5"
+          },
+          {
+            from: "mac_2c5bb8b9ead9",
+            to: "imei_868854029652527",
+            length: 3070,
+            id: "307-6"
+          },
+          {
+            from: "mac_2c5bb8b9ead9",
+            to: "imsi_460008491954981",
+            length: 4640,
+            id: "464-7"
+          },
+          {
+            from: "mac_2c5bb8b9ead9",
+            to: "imsi_460023799630110",
+            length: 3330,
+            id: "333-8"
+          },
+          {
+            from: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            to: "imsi_460023799630110",
+            length: 710,
+            id: "71-9"
+          },
+          {
+            from: "imei_868854029652527",
+            to: "imei_864779033901400",
+            length: 1420,
+            id: "142-10"
+          },
+          {
+            from: "imsi_460008491954981",
+            to: "imei_861078035871288",
+            length: 1130,
+            id: "113-11"
+          },
+          {
+            from: "imsi_460008491954981",
+            to: "imei_865685025143688",
+            length: 800,
+            id: "80-12"
+          },
+          {
+            from: "imsi_460008491954981",
+            to: "imei_868854029652527",
+            length: 2060,
+            id: "206-13"
+          },
+          {
+            from: "imsi_460023799630110",
+            to: "imei_864779033901400",
+            length: 5000,
+            id: "500-14"
+          },
+          {
+            from: "imsi_460023799630110",
+            to: "imei_868854029652527",
+            length: 2220,
+            id: "222-15"
+          },
+          {
+            from: "mac_1c77f6601bd7",
+            to: "imei_861078035871288",
+            length: 5000,
+            id: "500-16"
+          },
+          {
+            from: "mac_1c77f6601bd7",
+            to: "imsi_460022794725450",
+            length: 660,
+            id: "66-17"
+          },
+          {
+            from: "mac_1c77f6601bd7",
+            to: "imsi_460079799772969",
+            length: 6840,
+            id: "684-18"
+          },
+          {
+            from: "mac_2c5bb8b9ead9",
+            to: "imei_865685025143688",
+            length: 400,
+            id: "40-19"
+          },
+          {
+            from: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            to: "imei_868854029652527",
+            length: 1050,
+            id: "105-20"
+          }
+        ];
+        var container = document.getElementById("mynetwork");
+        var data = {
+          nodes: nodes,
+          edges: edges
+        };
+        var options = {
+          nodes: {
+            shape: "dot",
+            size: 16
+          },
+          edges: {
+            smooth: {
+              enabled: false //设置线是否可弯曲
+            }
+            // physics: false
+          },
+
+          layout: {
+            randomSeed: 34
+          },
+          physics: {
+            // enabled: false,
+            forceAtlas2Based: {
+              gravitationalConstant: -26,
+              centralGravity: 0.005,
+              springConstant: 0.18,
+              springLength: 100
+            },
+            maxVelocity: 146,
+            solver: "forceAtlas2Based",
+            timestep: 0.35,
+            stabilization: {
+              enabled: true,
+              iterations: 2000,
+              updateInterval: 25
+            }
+          }
+        };
+
+        var network = new vis.Network(container, data, options);
+
+        // network.on("stabilizationProgress", function(params) {
+        //   var maxWidth = 496;
+        //   var minWidth = 20;
+        //   var widthFactor = params.iterations / params.total;
+        //   var width = Math.max(minWidth, maxWidth * widthFactor);
+
+        //   document.getElementById("bar").style.width = width + "px";
+        //   document.getElementById("text").innerHTML =
+        //     Math.round(widthFactor * 100) + "%";
+        // });
+        // network.once("stabilizationIterationsDone", function() {
+        //   document.getElementById("text").innerHTML = "100%";
+        //   document.getElementById("bar").style.width = "496px";
+        //   document.getElementById("loadingBar").style.opacity = 0;
+        //   // really clean the dom element
+        //   setTimeout(function() {
+        //     document.getElementById("loadingBar").style.display = "none";
+        //   }, 500);
+        // });
+      }
+
+      window.addEventListener("load", () => {
+        draw();
+      });
+    </script>
+  </body>
+</html>

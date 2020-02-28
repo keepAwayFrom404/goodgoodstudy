@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #cy {
+        width: 1000px;
+        height: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
+    <script>
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        elements: [
+          // list of graph elements to start with
+          {
+            // node a
+            data: { id: "imei_868854029652527", label: "imei_868854029652527" }
+          },
+          {
+            // node b
+            data: { id: "imsi_460008491954981", label: "imsi_460008491954981" }
+          },
+          {
+            // node b
+            data: { id: "imsi_460018327513148", label: "imsi_460018327513148" }
+          },
+          {
+            // node b
+            data: { id: "imei_864779033901400", label: "imei_864779033901400" }
+          },
+          {
+            // node b
+            data: { id: "imsi_460023799630110", label: "imsi_460023799630110" }
+          },
+          {
+            // node b
+            data: { id: "mac_2c5bb8b9ead9", label: "mac_2c5bb8b9ead9" }
+          },
+          {
+            // node b
+            data: { id: "imsi_460110299805465", label: "imsi_460110299805465" }
+          },
+          {
+            // node b
+            data: {
+              id: "imei_861078035871288",
+              label: "imei_861078035871288",
+              group: 0
+            }
+          },
+
+          {
+            // node b
+            data: { id: "imei_865685025143688", label: "imei_865685025143688" }
+          },
+          {
+            // node b
+            data: {
+              id: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+              label: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc"
+            }
+          },
+          {
+            // node b
+            data: {
+              id: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+              label: "pn_8c4f1accf11b0a76392a2d27c61c9758"
+            }
+          },
+          {
+            // node b
+            data: { id: "mac_1c77f6601bd7", label: "mac_1c77f6601bd7" }
+          },
+          {
+            // node b
+            data: { id: "imsi_460022794725450", label: "imsi_460022794725450" }
+          },
+          {
+            // node b
+            data: { id: "imsi_460079799772969", label: "imsi_460079799772969" }
+          },
+          {
+            // node b
+            data: {
+              id: "pn_6c894cdc1c5698a708b20da0c64a878d",
+              label: "pn_6c894cdc1c5698a708b20da0c64a878d"
+            }
+          },
+          {
+            // node b
+            data: {
+              id: "pn_7695aa7403e736602c7eed4a899e2555",
+              label: "pn_7695aa7403e736602c7eed4a899e2555"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460018327513148",
+              target: "imei_868854029652527"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460018327513148",
+              target: "imsi_460008491954981"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460110299805465",
+              target: "imsi_460018327513148"
+            }
+          },
+
+          {
+            // edge ab
+            data: { source: "mac_2c5bb8b9ead9", target: "imsi_460018327513148" }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460023799630110",
+              target: "imsi_460018327513148"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460018327513148",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+              target: "imei_868854029652527"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+              target: "imsi_460008491954981"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+              target: "imsi_460023799630110"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+              target: "mac_2c5bb8b9ead9"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460110299805465",
+              target: "imsi_460008491954981"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460110299805465",
+              target: "imsi_460023799630110"
+            }
+          },
+
+          {
+            // edge ab
+            data: { source: "mac_2c5bb8b9ead9", target: "imsi_460110299805465" }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460110299805465",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imei_864779033901400",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imei_868854029652527",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imei_865685025143688",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460008491954981",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460023799630110",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460023799630110",
+              target: "imei_864779033901400"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imei_868854029652527",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460008491954981",
+              target: "imei_868854029652527"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+              target: "imei_868854029652527"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460023799630110",
+              target: "imei_868854029652527"
+            }
+          },
+
+          {
+            // edge ab
+            data: { source: "mac_2c5bb8b9ead9", target: "imei_868854029652527" }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imei_868854029652527",
+              target: "imei_865685025143688"
+            }
+          },
+
+          {
+            // edge ab
+            data: { source: "mac_1c77f6601bd7", target: "imei_861078035871288" }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460022794725450",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: { source: "mac_2c5bb8b9ead9", target: "imei_861078035871288" }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460079799772969",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460008491954981",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imei_865685025143688",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_6c894cdc1c5698a708b20da0c64a878d",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_7695aa7403e736602c7eed4a899e2555",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "imsi_460023799630110",
+              target: "imei_861078035871288"
+            }
+          },
+
+          {
+            // edge ab
+            data: {
+              source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+              target: "imei_861078035871288"
+            }
+          }
+        ],
+        style: [
+          // the stylesheet for the graph
+          {
+            selector: "node",
+            style: {
+              "background-image": function(ele) {
+                return "./1.jpeg";
+              },
+              "background-width": 70,
+              "background-height": 70,
+              width: 70,
+              height: 70,
+              label: "data(id)"
+            }
+          },
+
+          {
+            selector: "edge",
+            style: {
+              width: 3,
+              "line-color": "#ccc",
+              "target-arrow-color": "#ccc",
+              "target-arrow-shape": "triangle"
+            }
+          }
+        ],
+        layout: {
+          name: "random",
+          fit: true
+        }
+      });
+    </script>
+  </body>
+</html>

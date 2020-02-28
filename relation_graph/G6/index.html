@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .g6-tooltip {
+        border: 1px solid #e2e2e2;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #545454;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px 8px;
+        box-shadow: rgb(174, 174, 174) 0px 0px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="g6"></div>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.2.3/build/g6.js"></script>
+    <script>
+      // const data = {
+      //   nodes: [
+      //     {
+      //       id: "0",
+      //       label: "MAC1",
+      //       class: "mac"
+      //     },
+      //     {
+      //       id: "1",
+      //       label: "IMEI2",
+      //       class: "imei"
+      //     },
+      //     {
+      //       id: "2",
+      //       label: "IMSI1",
+      //       class: "imsi"
+      //     },
+      //     {
+      //       id: "3",
+      //       label: "PN1",
+      //       class: "pn"
+      //     },
+      //     {
+      //       id: "4",
+      //       label: "MAC2",
+      //       class: "mac"
+      //     },
+      //     {
+      //       id: "5",
+      //       label: "IMEI1",
+      //       class: "imei"
+      //     },
+      //     {
+      //       id: "6",
+      //       label: "IMSI2",
+      //       class: "imsi"
+      //     }
+      //   ],
+      //   edges: [
+      //     {
+      //       source: "0",
+      //       target: "1",
+      //       id: "5-gt"
+      //     },
+      //     {
+      //       source: "0",
+      //       target: "2",
+      //       id: "5-gt"
+      //     },
+      //     {
+      //       source: "1",
+      //       target: "2",
+      //       id: "5-gt"
+      //     },
+      //     {
+      //       source: "2",
+      //       target: "3",
+      //       id: "3-gt"
+      //     },
+      //     {
+      //       source: "2",
+      //       target: "4",
+      //       id: "1-gt"
+      //     },
+      //     {
+      //       source: "2",
+      //       target: "5",
+      //       id: "1-gt"
+      //     },
+      //     {
+      //       source: "4",
+      //       target: "5",
+      //       id: "5-gt"
+      //     },
+      //     {
+      //       source: "4",
+      //       target: "6",
+      //       id: "5-gt"
+      //     },
+      //     {
+      //       source: "5",
+      //       target: "6",
+      //       id: "5-gt"
+      //     }
+      //   ]
+      // };
+      const data = {
+        nodes: [
+          { id: "imei_868854029652527", label: "imei_868854029652527" },
+          { id: "imsi_460008491954981", label: "imsi_460008491954981" },
+          { id: "imsi_460018327513148", label: "imsi_460018327513148" },
+          { id: "imei_864779033901400", label: "imei_864779033901400" },
+          { id: "imsi_460023799630110", label: "imsi_460023799630110" },
+          { id: "mac_2c5bb8b9ead9", label: "mac_2c5bb8b9ead9" },
+          { id: "imsi_460110299805465", label: "imsi_460110299805465" },
+          {
+            id: "imei_861078035871288",
+            label: "imei_861078035871288",
+            group: 0
+          },
+          { id: "imei_865685025143688", label: "imei_865685025143688" },
+          {
+            id: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            label: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc"
+          },
+          {
+            id: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            label: "pn_8c4f1accf11b0a76392a2d27c61c9758"
+          },
+          { id: "mac_1c77f6601bd7", label: "mac_1c77f6601bd7" },
+          { id: "imsi_460022794725450", label: "imsi_460022794725450" },
+          { id: "imsi_460079799772969", label: "imsi_460079799772969" },
+          {
+            id: "pn_6c894cdc1c5698a708b20da0c64a878d",
+            label: "pn_6c894cdc1c5698a708b20da0c64a878d"
+          },
+          {
+            id: "pn_7695aa7403e736602c7eed4a899e2555",
+            label: "pn_7695aa7403e736602c7eed4a899e2555"
+          }
+        ],
+        edges: [
+          {
+            source: "imei_864779033901400",
+            target: "imei_861078035871288",
+            id: "52-1",
+            length: 52
+          },
+          {
+            source: "imei_865685025143688",
+            target: "imei_861078035871288",
+            id: "117-2",
+            length: 117
+          },
+          {
+            source: "imei_868854029652527",
+            target: "imei_864779033901400",
+            id: "416-3",
+            length: 416
+          },
+          {
+            source: "imsi_460008491954981",
+            target: "imei_861078035871288",
+            length: 183,
+            id: "183-4"
+          },
+          {
+            source: "imsi_460008491954981",
+            target: "imei_864779033901400",
+            length: 322,
+            id: "322-5"
+          },
+          {
+            source: "imsi_460008491954981",
+            target: "imei_865685025143688",
+            length: 222,
+            id: "222-6"
+          },
+          {
+            source: "imsi_460018327513148",
+            target: "imei_868854029652527",
+            length: 125,
+            id: "125-7"
+          },
+          {
+            source: "imsi_460022794725450",
+            target: "imei_861078035871288",
+            length: 66,
+            id: "66-8"
+          },
+          {
+            source: "imsi_460023799630110",
+            target: "imei_861078035871288",
+            length: 27,
+            id: "27-9"
+          },
+          {
+            source: "imsi_460023799630110",
+            target: "imei_864779033901400",
+            length: 444,
+            id: "444-10"
+          },
+          {
+            source: "imsi_460023799630110",
+            target: "imei_865685025143688",
+            length: 71,
+            id: "71-11"
+          },
+          {
+            source: "imsi_460023799630110",
+            target: "imei_868854029652527",
+            length: 363,
+            id: "363-12"
+          },
+          {
+            source: "imsi_460023799630110",
+            target: "imsi_460008491954981",
+            length: 275,
+            id: "275-13"
+          },
+          {
+            source: "imsi_460110299805465",
+            target: "imei_868854029652527",
+            length: 222,
+            id: "222-14"
+          },
+          {
+            source: "mac_1c77f6601bd7",
+            target: "imei_861078035871288",
+            length: 333,
+            id: "333-15"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imei_861078035871288",
+            length: 187,
+            id: "187-16"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imei_865685025143688",
+            length: 192,
+            id: "192-17"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imsi_460008491954981",
+            length: 487,
+            id: "487-18"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imsi_460018327513148",
+            length: 90,
+            id: "90-19"
+          },
+          {
+            source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            target: "imei_864779033901400",
+            length: 83,
+            id: "83-20"
+          },
+          {
+            source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            target: "imei_868854029652527",
+            length: 125,
+            id: "125-21"
+          },
+          {
+            source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            target: "mac_2c5bb8b9ead9",
+            length: 90,
+            id: "90-22"
+          },
+          {
+            source: "pn_7695aa7403e736602c7eed4a899e2555",
+            target: "imei_861078035871288",
+            length: 34,
+            id: "34-23"
+          },
+          {
+            source: "pn_7695aa7403e736602c7eed4a899e2555",
+            target: "mac_1c77f6601bd7",
+            length: 66,
+            id: "66-24"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "imei_864779033901400",
+            length: 117,
+            id: "117-25"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "imei_865685025143688",
+            length: 384,
+            id: "384-26"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "mac_2c5bb8b9ead9",
+            length: 259,
+            id: "259-27"
+          },
+          {
+            source: "imei_865685025143688",
+            target: "imei_864779033901400",
+            length: 62,
+            id: "62-28"
+          },
+          {
+            source: "imei_868854029652527",
+            target: "imei_861078035871288",
+            length: 95,
+            id: "95-29"
+          },
+          {
+            source: "imei_868854029652527",
+            target: "imei_865685025143688",
+            length: 50,
+            id: "50-30"
+          },
+          {
+            source: "imsi_460008491954981",
+            target: "imei_868854029652527",
+            length: 400,
+            id: "400-31"
+          },
+          {
+            source: "imsi_460018327513148",
+            target: "imei_864779033901400",
+            length: 166,
+            id: "166-32"
+          },
+          {
+            source: "imsi_460018327513148",
+            target: "imsi_460008491954981",
+            length: 86,
+            id: "86-33"
+          },
+          {
+            source: "imsi_460023799630110",
+            target: "imsi_460018327513148",
+            length: 200,
+            id: "200-34"
+          },
+          {
+            source: "imsi_460079799772969",
+            target: "imei_861078035871288",
+            length: 391,
+            id: "391-35"
+          },
+          {
+            source: "imsi_460079799772969",
+            target: "imsi_460022794725450",
+            length: 50,
+            id: "50-36"
+          },
+          {
+            source: "imsi_460110299805465",
+            target: "imei_864779033901400",
+            length: 285,
+            id: "285-37"
+          },
+          {
+            source: "imsi_460110299805465",
+            target: "imsi_460008491954981",
+            length: 160,
+            id: "160-38"
+          },
+          {
+            source: "imsi_460110299805465",
+            target: "imsi_460018327513148",
+            length: 166,
+            id: "166-39"
+          },
+          {
+            source: "imsi_460110299805465",
+            target: "imsi_460023799630110",
+            length: 333,
+            id: "333-40"
+          },
+          {
+            source: "mac_1c77f6601bd7",
+            target: "imsi_460022794725450",
+            length: 62,
+            id: "62-41"
+          },
+          {
+            source: "mac_1c77f6601bd7",
+            target: "imsi_460079799772969",
+            length: 437,
+            id: "437-42"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imei_864779033901400",
+            length: 333,
+            id: "333-43"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imei_868854029652527",
+            length: 411,
+            id: "411-44"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imsi_460023799630110",
+            length: 285,
+            id: "285-45"
+          },
+          {
+            source: "mac_2c5bb8b9ead9",
+            target: "imsi_460110299805465",
+            length: 166,
+            id: "166-46"
+          },
+          {
+            source: "pn_6c894cdc1c5698a708b20da0c64a878d",
+            target: "imei_861078035871288",
+            length: 222,
+            id: "222-47"
+          },
+          {
+            source: "pn_6c894cdc1c5698a708b20da0c64a878d",
+            target: "imsi_460079799772969",
+            length: 307,
+            id: "307-48"
+          },
+          {
+            source: "pn_6c894cdc1c5698a708b20da0c64a878d",
+            target: "mac_1c77f6601bd7",
+            // physics: false,
+            length: 363,
+            id: "363-49"
+          },
+          {
+            source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            target: "imsi_460008491954981",
+            length: 86,
+            id: "86-50"
+          },
+          {
+            source: "pn_70357f9c82fb5f9c5a2f521bb9bd87cc",
+            target: "imsi_460023799630110",
+            length: 100,
+            id: "100-51"
+          },
+          {
+            source: "pn_7695aa7403e736602c7eed4a899e2555",
+            target: "imsi_460079799772969",
+            length: 52,
+            id: "52-52"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "imei_861078035871288",
+            length: 171,
+            id: "171-53"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "imei_868854029652527",
+            length: 142,
+            id: "142-54"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "imsi_460008491954981",
+            length: 250,
+            id: "250-55"
+          },
+          {
+            source: "pn_8c4f1accf11b0a76392a2d27c61c9758",
+            target: "imsi_460023799630110",
+            length: 66,
+            id: "66-56"
+          }
+        ]
+      };
+      const nodes = data.nodes;
+      const edges = data.edges;
+      nodes.forEach(node => {
+        if (!node.style) {
+          node.style = {};
+        }
+        node.style.lineWidth = 1;
+        node.style.stroke = "#666";
+        switch (node.class) {
+          case "mac": {
+            node.style.fill = "red";
+            break;
+          }
+          case "imei": {
+            node.style.fill = "gray";
+            break;
+          }
+          case "imsi": {
+            node.style.fill = "blue";
+            break;
+          }
+          case "pn": {
+            node.style.fill = "green";
+            break;
+          }
+        }
+      });
+      // edges.forEach(edge => {
+      //   if (!edge.style) {
+      //     edge.style = {};
+      //   }
+      //   edge.style.lineWidth = edge.weight;
+      //   edge.style.opacity = 0.6;
+      // });
+      const graph = new G6.Graph({
+        container: "g6",
+        width: 1200, // Number，必须，图的宽度
+        height: 900,
+        layout: {
+          type: "force",
+          center: [500, 450],
+          linkDistance: 300,
+          linkDistance: d => {
+            return 10 * parseInt(d.id);
+          },
+          // nodeStrength: node => {
+          //   switch (node.class) {
+          //     case "imei":
+          //       return 1000;
+          //       break;
+          //     case "imsi":
+          //       return 500;
+          //       break;
+          //     case "mac":
+          //       return 800;
+          //       break;
+          //     case "pn":
+          //       return 100;
+          //       break;
+          //     default:
+          //       return -30;
+          //       break;
+          //   }
+          // },
+          preventOverlap: true,
+          strictRadial: false
+        },
+        animate: true,
+        modes: {
+          // 支持的 behavior
+          default: [
+            "drag-canvas",
+            "drag-node",
+            "zoom-canvas",
+            "activate-relations",
+            {
+              type: "tooltip", // 提示框
+              formatText(model) {
+                // 提示框文本内容
+                const text =
+                  "label: " + model.label + "<br/> class: " + model.class;
+                return text;
+              }
+            }
+          ],
+          edit: ["click-select"]
+        },
+        defaultNode: {
+          size: 30,
+          labelCfg: {
+            style: {
+              fill: "#fff"
+            }
+          }
+        },
+        defaultEdge: {
+          style: {
+            stroke: "grey"
+          }
+        }
+      });
+      // graph.setMode("edit");
+      graph.data(data); // 加载远程数据
+      graph.render(); // 渲染
+
+      const main = async () => {
+        const response = await fetch(
+          "https://gw.alipayobjects.com/os/basement_prod/6cae02ab-4c29-44b2-b1fd-4005688febcb.json"
+        );
+        const data = await response.json();
+      };
+      main();
+    </script>
+  </body>
+</html>
