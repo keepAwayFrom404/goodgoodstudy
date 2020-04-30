@@ -12,7 +12,7 @@
     "@antv/g2": "^3.5.8-beta.1",
     "@antv/g2-plugin-slider": "^2.1.1",
     "core-js": "^2.6.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "papaparse": "^5.0.0",
     "vue": "^2.6.10"
   },
