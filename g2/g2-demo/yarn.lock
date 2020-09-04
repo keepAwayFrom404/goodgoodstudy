@@ -56,6 +56,11 @@
     topojson-client "~3.0.0"
     wolfy87-eventemitter "~5.1.0"
 
+"@antv/g2-plugin-slider@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@antv/g2-plugin-slider/-/g2-plugin-slider-2.1.1.tgz#c20c5f1cf085bea478f8ab1fc84837e45c46a065"
+  integrity sha512-nB678VEGG3FkrvkDDFADAKjLQIeXzITEYqey5oeOpbf0vT5jOa55lQDyJDZ79cK8PmU/Hz6VPeSb3CNQBA+/FQ==
+
 "@antv/g2@^3.5.8-beta.1":
   version "3.5.8-beta.1"
   resolved "https://registry.npm.taobao.org/@antv/g2/download/@antv/g2-3.5.8-beta.1.tgz#71ba5b065ce513be916ceca258d2a02e1ea8e441"
@@ -6008,10 +6013,10 @@ pako@~1.0.5:
   resolved "https://registry.npm.taobao.org/pako/download/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha1-Qyi621CGpCaqkPVBl31JVdpclzI=
 
-papaparse@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npm.taobao.org/papaparse/download/papaparse-5.0.0.tgz#026f66f85b7f59378719c8cc130f8fce3d71f396"
-  integrity sha1-Am9m+Ft/WTeHGcjMEw+Pzj1x85Y=
+papaparse@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.2.0.tgz#97976a1b135c46612773029153dc64995caa3b7b"
+  integrity sha512-ylq1wgUSnagU+MKQtNeVqrPhZuMYBvOSL00DHycFTCxownF95gpLAk1HiHdUW77N8yxRq1qHXLdlIPyBSG9NSA==
 
 parallel-transform@^1.1.0:
   version "1.1.0"
